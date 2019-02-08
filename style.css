@@ -5,7 +5,7 @@
 
 body {
 	font-family: 'Inter', sans-serif;
-	background-color: #FFE49F;
+	background-color: #F1F1F1;
 	color: #15213C;
 }
 
@@ -15,7 +15,7 @@ body {
 
 .main-container {
 	position: absolute;
-	top: 16%;
+	top: 20%;
 	left: 8%;
 	right: 6%;
 	padding-bottom: 15vh;
@@ -23,7 +23,7 @@ body {
 
 h1 {
 	font-family: 'Source Serif Pro', serif;
-	color: #F63240;
+	color: #15213C;
 	font-size: 38px;
 	font-weight: 700;
 }
@@ -51,11 +51,11 @@ p {
 
 a {
 	color:  #252525;
-    border-bottom: 1px dotted #F63240;
+    border-bottom: 1px dotted #1141E2;
 	text-decoration: none;
 }
 
 a:hover {
-	color: #F63240;
+	color: #1141E2;
 	transition-duration: 0.3s;
 }
