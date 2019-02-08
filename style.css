@@ -1,205 +1,61 @@
-
-/* andrewtang.net */
-/* Andrew Tang */
-
-body {
-	background-color: #fbfbfb;
-	font-family: Helvetica, Arial, sans-serif;
-	font-size: 18px;
+* {
+	padding: 0;
+	margin: 0;
 }
 
-#wrapper {
-	height: auto;
-	width: 90%;
-	max-width: 300px;
-	margin: 5% 5%;
+body {
+	font-family: 'Inter', sans-serif;
+	background-color: #FFE49F;
+	color: #15213C;
+}
+
+@supports (font-variation-settings: normal) {
+  html { font-family: 'Inter var', sans-serif; }
+}
+
+.main-container {
+	position: absolute;
+	top: 20%;
+	left: 8%;
+	right: 6%;
+	padding-bottom: 15vh;
 }
 
 h1 {
-	font-size: 30px;
-	color: #1d1d1d;
-	line-height: 34pt;
-	border-bottom: 3px solid #fb8e00;
-	padding-bottom: 5px;
-	-webkit-animation: fadeInSmall 0.5s ease;
-	-moz-animation: fadeInSmall 0.5s ease;
+	font-family: 'Source Serif Pro', serif;
+	color: #F63240;
+	font-size: 38px;
+	font-weight: 700;
+}
+
+h2 {
+	color: #15213C;
+	font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+	line-height: 28px;
 }
 
 p {
-	font-size: 18px;
-	color: #898989;
-	line-height: 28px;
-	margin-top: 28px;
-	-webkit-animation: fadeInSmall 0.5s ease both;
-	-webkit-animation-delay: 0.3s;
-	-moz-animation-delay: 0.3s;
+    color: #252525;
+	font-size: 16px;
+	font-weight: 500;
+    line-height: 26px;
+	padding-bottom: 15px;
 }
 
-span.hidden {
-	display: none;
-	color: black;
-}
-
-a.link {
-	font-weight: normal;
-	color: #898989 !important;
-	border-bottom: thin dotted !important;
-}
-
-a.link:hover + span.hidden {
-	display:inline;
-} 
-
-a.link:hover {
-	text-decoration: none;
-	font-style: italic;
-	color: #fb8e00 !important;
-	background: #fff;
+.footer {
+	font-size: 14px;
+	padding-bottom: 8px;
 }
 
 a {
-	font-weight: bold;
-}
-
-a:link {
-	color: #fb8e00;
+	color:  #252525;
+    border-bottom: 1px dotted #F63240;
 	text-decoration: none;
 }
 
 a:hover {
-	border-bottom: 3px solid #fb8e00;
+	color: #F63240;
+	transition-duration: 0.3s;
 }
-
-a:visited {
-	color: #fb8e00;
-	text-decoration: none;
-}
-
-::selection {
-	color: #fff;
-	background: #fb8e00; /* Safari */
-}
-
-::-moz-selection {
-	color: #fff;
-	background: #fb8e00	; /* Firefox */	
-}
-
-/*
-Animate.css - http://daneden.me/animate
-LICENSED UNDER THE  MIT LICENSE (MIT)
-
-Copyright © 2012 Dan Eden
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
-@-webkit-keyframes fadeInSmall {
-	0% {
-		opacity: 0;
-		-webkit-transform: translateY(-15px);
-	}
-	100% {
-		opacity: 1;
-		-webkit-transform: translateY(0);
-	}
-}
-.animated {
-	-webkit-animation-duration: 1s;
-	   -moz-animation-duration: 1s;
-	    -ms-animation-duration: 1s;
-	        animation-duration: 1s;
-	-webkit-animation-fill-mode: both;
-	   -moz-animation-fill-mode: both;
-	    -ms-animation-fill-mode: both;
-	        animation-fill-mode: both;
-}
-
-@-webkit-keyframes fadeIn {
-	0% {opacity: 0;}	
-	100% {opacity: 1;}
-}
-
-@-moz-keyframes fadeIn {
-	0% {opacity: 0;}	
-	100% {opacity: 1;}
-}
-
-@-ms-keyframes fadeIn {
-	0% {opacity: 0;}	
-	100% {opacity: 1;}
-}
-
-@keyframes fadeIn {
-	0% {opacity: 0;}	
-	100% {opacity: 1;}
-}
-
-.fadeIn {
-	-webkit-animation-name: fadeIn;
-	-moz-animation-name: fadeIn;
-	-ms-animation-name: fadeIn;
-	-o-animation-name: fadeIn;
-	animation-name: fadeIn;
-}
-
-
-@-webkit-keyframes fadeInDown {
-	0% {
-		opacity: 0;
-		-webkit-transform: translateY(-20px);
-	}
-	
-	100% {
-		opacity: 1;
-		-webkit-transform: translateY(0);
-	}
-}
-
-@-moz-keyframes fadeInDown {
-	0% {
-		opacity: 0;
-		-moz-transform: translateY(-20px);
-	}
-	
-	100% {
-		opacity: 1;
-		-moz-transform: translateY(0);
-	}
-}
-
-@-ms-keyframes fadeInDown {
-	0% {
-		opacity: 0;
-		-ms-transform: translateY(-20px);
-	}
-	
-	100% {
-		opacity: 1;
-		-ms-transform: translateY(0);
-	}
-}
-
-
-@keyframes fadeInDown {
-	0% {
-		opacity: 0;
-		transform: translateY(-20px);
-	}
-	
-	100% {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-.fadeInDown {
-	-webkit-animation-name: fadeInDown;
-	-moz-animation-name: fadeInDown;
-	-ms-animation-name: fadeInDown;
-	animation-name: fadeInDown;
-}
-
