@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-foreground antialiased;
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+    background-color: #F1F1F1;
+    font-size: 16px;
+  }
+
+  ::selection {
+    background-color: #FFE5B4;
+    color: #0a0a0a;
+  }
+
+  ::-moz-selection {
+    background-color: #FFE5B4;
+    color: #0a0a0a;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
