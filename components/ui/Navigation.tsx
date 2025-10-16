@@ -40,9 +40,10 @@ export default function Navigation() {
   }, [mobileMenuOpen]);
 
   const menuLinks = [
-    { href: "#work", label: "Work" },
-    { href: "#about", label: "About" },
-    { href: "mailto:hello@andrewtang.net", label: "Resume" },
+    { href: "#work", label: "Work", strikethrough: true },
+    { href: "#canvas", label: "Canvas", strikethrough: true },
+    { href: "#about", label: "About", strikethrough: true },
+    { href: "mailto:hello@andrewtang.net", label: "Resume", strikethrough: true },
   ];
 
   return (
@@ -71,7 +72,7 @@ export default function Navigation() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="text-sm font-mono uppercase tracking-wider text-muted dark:text-muted-dark hover:text-black dark:hover:text-white transition-colors line-through"
+                    className={`text-sm font-mono uppercase tracking-wider text-muted dark:text-muted-dark hover:text-black dark:hover:text-white transition-colors ${link.strikethrough ? 'line-through' : ''}`}
                   >
                     {link.label}
                   </Link>
@@ -130,7 +131,7 @@ export default function Navigation() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-3xl font-mono uppercase tracking-wider hover:opacity-60 transition-opacity line-through"
+                    className={`text-3xl font-mono uppercase tracking-wider hover:opacity-60 transition-opacity ${link.strikethrough ? 'line-through' : ''}`}
                   >
                     {link.label}
                   </Link>

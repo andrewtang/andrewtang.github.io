@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Navigation />
-      <main>
+      <main className="flex-1">
         <Hero />
       </main>
       <Footer />

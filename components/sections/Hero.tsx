@@ -18,10 +18,10 @@ export default function Hero() {
   };
 
   return (
-    <section className="min-h-screen flex items-center px-6 md:px-16 pt-20">
+    <section className="flex items-center px-6 md:px-16 pt-20">
       <div className="w-full">
         {/* NOTE: Two-column layout can be restored by uncommenting desktop:grid-cols-2 below */}
-        <div className="grid grid-cols-1 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 gap-12 lg:gap-16 pt-[8vh] lg:pt-[16vh] items-start">
           {/* Left side - Main heading */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -29,7 +29,7 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             className="max-w-[700px]"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-6 overflow-visible" style={{ lineHeight: '1.1', letterSpacing: '-0.03em' }}>
+            <h1 className="text-[48px] md:text-5xl lg:text-6xl font-serif mb-6 overflow-visible" style={{ lineHeight: '1.1', letterSpacing: '-0.03em' }}>
               I'm Andy, a product designer who enjoys {" "}
               <span
                 className="relative inline-block group"
@@ -82,8 +82,55 @@ export default function Hero() {
             <div className="space-y-6 md:space-y-4">
               {experience.map((exp, index) => (
                 <div key={exp.id}>
-                  {/* Mobile/Tablet: Two columns */}
-                  <div className="grid grid-cols-[140px_1fr] gap-x-10 lg:hidden">
+                  {/* Mobile: Stacked vertically */}
+                  <div className="flex flex-col gap-2 md:hidden">
+                    <div className="text-muted dark:text-muted-dark font-mono text-sm">
+                      {exp.period}
+                    </div>
+                    <div className="grid grid-cols-[120px_1fr] gap-x-4 items-center">
+                      <div className="flex items-center" style={{ lineHeight: '1' }}>
+                        {exp.url ? (
+                          <a
+                            href={exp.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 hover:text-black dark:hover:text-white hover:opacity-60 transition-all group"
+                            style={{ lineHeight: '1' }}
+                          >
+                            {exp.logo && (
+                              <Image
+                                src={exp.logo}
+                                alt={`${exp.company} logo`}
+                                width={24}
+                                height={24}
+                                className="inline rounded-md transition-all duration-100 ease-in-out group-hover:scale-110 group-hover:-rotate-12"
+                              />
+                            )}
+                            {exp.company}
+                          </a>
+                        ) : (
+                          <span className="inline-flex items-center gap-2 group" style={{ lineHeight: '1' }}>
+                            {exp.logo && (
+                              <Image
+                                src={exp.logo}
+                                alt={`${exp.company} logo`}
+                                width={24}
+                                height={24}
+                                className="inline rounded-md transition-all duration-100 ease-in-out group-hover:scale-110 group-hover:-rotate-12"
+                              />
+                            )}
+                            {exp.company}
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-muted dark:text-muted-dark flex items-center" style={{ lineHeight: '1' }}>
+                        {exp.role}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Tablet: Two columns */}
+                  <div className="hidden md:grid grid-cols-[140px_1fr] gap-x-10 lg:hidden">
                     <div className="text-muted dark:text-muted-dark font-mono">
                       {exp.period}
                     </div>
