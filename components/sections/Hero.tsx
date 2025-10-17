@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { intro, experience } from "@/data/content";
+import { experience } from "@/data/content";
 import { useState } from "react";
 
 export default function Hero() {

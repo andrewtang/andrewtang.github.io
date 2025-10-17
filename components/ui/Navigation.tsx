@@ -43,7 +43,7 @@ export default function Navigation() {
   const menuLinks = [
     { href: "#work", label: "Work", strikethrough: true },
     { href: "#canvas", label: "Canvas", strikethrough: true },
-    { href: "#about", label: "About", strikethrough: true },
+    { href: "/about", label: "About", strikethrough: false },
     { href: "mailto:hello@andrewtang.net", label: "Resume", strikethrough: true },
   ];
 

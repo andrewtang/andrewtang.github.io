@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Andrew Tang",
-  title: "Andrew Tang - Product Designer",
+  title: "Andrew Tang — Product Designer",
   description: "Product Designer based in Melbourne, Australia",
   url: "https://andrewtang.net",
   links: {
@@ -10,13 +10,6 @@ export const siteConfig = {
     twitter: "https://twitter.com/tangandrew",
     dribbble: "https://dribbble.com/andrewtang",
   },
-};
-
-export const intro = {
-  greeting: "Hi, I'm Andy Tang",
-  role: "Product Designer",
-  location: "Melbourne, Australia",
-  description: "I'm a designer with over 10 years experience, working across startups, corporates and anything in between. I focus on making sure the right products are designed, not just getting the products designed right.",
 };
 
 export const projects = [
@@ -82,3 +75,10 @@ export const experience = [
     logo: "/logos/various.svg",
   },
 ];
+
+export const about = {
+  tagline: "I'm a designer, builder, & rock climber",
+  intro: "I think deeply about people, products, and how technology shapes the future. I'm currently spending much of my free time exploring how AI can expand what's possible in design.",
+  personal: "Outside of work, I'm happiest when I'm outdoors, especially when I'm climbing. There's something about scaling a new route that brings out the best in me — I'm completely focused on the present and feel most alive. ",
+  availability: "I'm always keen on connecting with like-minded individuals.",
+};
