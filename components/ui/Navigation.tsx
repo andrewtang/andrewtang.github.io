@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
+import AnimatedLink from "./AnimatedLink";
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
@@ -69,13 +70,13 @@ export default function Navigation() {
             <div className="hidden md:flex items-center gap-8 md:gap-10 justify-between">
               <div className="flex items-center gap-8 md:gap-10">
                 {menuLinks.map((link) => (
-                  <Link
+                  <AnimatedLink
                     key={link.href}
                     href={link.href}
-                    className={`text-sm font-mono uppercase tracking-wider text-muted dark:text-muted-dark hover:text-black dark:hover:text-white transition-colors ${link.strikethrough ? 'line-through' : ''}`}
-                  >
-                    {link.label}
-                  </Link>
+                    label={link.label}
+                    strikethrough={link.strikethrough}
+                    className="text-sm font-mono uppercase tracking-wider text-muted dark:text-muted-dark hover:text-black dark:hover:text-white transition-colors"
+                  />
                 ))}
               </div>
               <ThemeToggle />
@@ -86,23 +87,26 @@ export default function Navigation() {
               <ThemeToggle />
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="flex flex-col gap-1.5 w-6 h-6 justify-center"
+                className="relative w-6 h-6"
                 aria-label="Toggle menu"
               >
                 <motion.span
-                  animate={mobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+                  animate={mobileMenuOpen ? { rotate: 45, y: 0 } : { rotate: 0, y: -6 }}
                   transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                  className="w-full h-px bg-black dark:bg-white"
+                  className="absolute left-0 top-1/2 w-full h-px bg-black dark:bg-white origin-center"
+                  style={{ translateY: "-50%" }}
                 />
                 <motion.span
                   animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
                   transition={{ duration: 0.2 }}
-                  className="w-full h-px bg-black dark:bg-white"
+                  className="absolute left-0 top-1/2 w-full h-px bg-black dark:bg-white"
+                  style={{ translateY: "-50%" }}
                 />
                 <motion.span
-                  animate={mobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+                  animate={mobileMenuOpen ? { rotate: -45, y: 0 } : { rotate: 0, y: 6 }}
                   transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                  className="w-full h-px bg-black dark:bg-white"
+                  className="absolute left-0 top-1/2 w-full h-px bg-black dark:bg-white origin-center"
+                  style={{ translateY: "-50%" }}
                 />
               </button>
             </div>
@@ -128,13 +132,13 @@ export default function Navigation() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 + 0.2 }}
                 >
-                  <Link
+                  <AnimatedLink
                     href={link.href}
+                    label={link.label}
+                    strikethrough={link.strikethrough}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`text-3xl font-mono uppercase tracking-wider hover:opacity-60 transition-opacity ${link.strikethrough ? 'line-through' : ''}`}
-                  >
-                    {link.label}
-                  </Link>
+                    className="text-3xl font-mono uppercase tracking-wider"
+                  />
                 </motion.div>
               ))}
             </div>
