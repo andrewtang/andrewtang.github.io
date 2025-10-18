@@ -30,6 +30,10 @@ function ProjectCard({ project, index }: ProjectCardProps) {
   const { position: mousePosition, handleMouseMove } = useCursorPosition();
   const { isHovered, showContent: showText, handleMouseEnter, handleMouseLeave } = useHoverDelay({ delay: 200 });
 
+  const hasLink = project.link && project.link.trim() !== '';
+  const Component = hasLink ? Link : 'div';
+  const linkProps = hasLink ? { href: project.link } : {};
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -37,8 +41,8 @@ function ProjectCard({ project, index }: ProjectCardProps) {
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
     >
-      <Link
-        href={project.link}
+      <Component
+        {...linkProps}
         className="group block"
       >
         {/* Project Image */}
@@ -131,7 +135,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
             <span>{project.description}</span>
           </div>
         </div>
-      </Link>
+      </Component>
     </motion.div>
   );
 }
