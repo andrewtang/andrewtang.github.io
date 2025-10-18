@@ -18,9 +18,10 @@ const geistSans = localFont({
 const newsreader = Newsreader({
   subsets: ["latin"],
   variable: "--font-newsreader",
+  weight: ["400", "600", "700"],
   style: ["normal", "italic"],
   display: "swap",
-  preload: true,
+  adjustFontFallback: false,
 });
 
 const geistMono = localFont({
