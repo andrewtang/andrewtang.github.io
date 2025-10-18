@@ -14,6 +14,7 @@ export interface SiteConfig {
 
 export interface AboutContent {
   tagline: string;
+  start: string;
   intro: string;
   personal: string;
   availability: string;

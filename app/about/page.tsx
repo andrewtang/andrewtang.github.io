@@ -38,7 +38,7 @@ export default function AboutPage() {
                     className="text-[48px] md:text-5xl lg:text-6xl font-serif mb-0 overflow-visible"
                     style={{ lineHeight: '1.1', letterSpacing: '-0.03em' }}
                   >
-                    I'm a designer, builder, &{" "}
+                    I'm a designer, tinkerer, &{" "}
                     <span
                       className="relative inline-block group"
                       onMouseEnter={() => setShowGif(true)}
@@ -49,7 +49,7 @@ export default function AboutPage() {
                         className="italic font-semibold bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-gradient inline-block px-1 cursor-default"
                         style={{ backgroundSize: '300% auto' }}
                       >
-                        rock climber
+                        climber
                       </span>
                       {/* Hover GIF - follows cursor */}
                       {showGif && (
@@ -63,11 +63,22 @@ export default function AboutPage() {
                   </h1>
                 </motion.div>
 
-                {/* Introduction */}
+                {/* Start */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+                >
+                  <p className="text-lg leading-relaxed">
+                    {about.start}
+                  </p>
+                </motion.div>
+
+                {/* Introduction */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
                   className="space-y-6"
                 >
                   {about.intro.split('\n').filter(line => line.trim()).map((paragraph, index) => (
@@ -81,7 +92,7 @@ export default function AboutPage() {
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+                  transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
                 >
                   <p className="text-lg leading-relaxed">
                     Outside of work, I'm happiest when I'm{" "}
@@ -93,7 +104,7 @@ export default function AboutPage() {
                     >
                       outdoors
                     </a>
-                    , especially when I'm climbing. There's something about scaling a new route that brings out the best in me — I'm completely focused on the present and feel most alive.
+                    , especially when I'm climbing. There's something about scaling a new route that brings out the best in me. I'm completely focused on the present and feel most alive.
                   </p>
                 </motion.div>
 
@@ -101,7 +112,7 @@ export default function AboutPage() {
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
+                  transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
                 >
                   <p className="text-lg leading-relaxed">
                     {about.availability}{" "}
@@ -120,7 +131,7 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-                className="flex justify-center lg:justify-start items-start lg:pt-12 lg:pr-12"
+                className="flex justify-center lg:justify-start items-start lg:pt-32 lg:pr-24"
               >
                 <div className="flex flex-row gap-2 lg:gap-0 w-full lg:w-auto">
                   {[
