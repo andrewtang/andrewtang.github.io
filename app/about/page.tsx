@@ -29,7 +29,7 @@ export default function AboutPage() {
           <div className="w-full pt-[8vh] lg:pt-[16vh] pb-24">
             <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12 lg:gap-16">
               {/* Left Column - Text Content */}
-              <div className="space-y-12 max-w-[910px]">
+              <div className="space-y-12 max-w-[920px]">
                 {/* Tagline */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
