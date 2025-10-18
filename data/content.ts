@@ -16,18 +16,26 @@ export const siteConfig: SiteConfig = {
 
 export const projects: Project[] = [
   {
-    id: 2,
-    title: "0 → 1",
+    id: 3,
+    title: "0 → 1 Direct Web Investing Experience",
     description: "Betashares • Shipped 2024",
     image: "/images/betashares.png",
     tags: ["UI Design", "Prototyping", "User Testing"],
     link: "",
   },
   {
-    id: 1,
+    id: 2,
     title: "Enhancing the servicing experience",
-    description: "Afterpay • Shipped 2022",
+    description: "Afterpay • Shipped 2021",
     image: "/images/afterpay.png",
+    tags: ["Design", "Product Strategy", "UX Research"],
+    link: "",
+  },
+  {
+    id: 1,
+    title: "A new way to pay",
+    description: "Latitude Financial x PayPal • Confidential 2018",
+    image: "/images/paypal.jpg",
     tags: ["Design", "Product Strategy", "UX Research"],
     link: "",
   },

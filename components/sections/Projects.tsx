@@ -8,13 +8,37 @@ import type { Project } from "@/types";
 import { useCursorPosition, useHoverDelay } from "@/hooks";
 
 export default function Projects() {
+  // Split projects into two columns for xl screens
+  const leftColumn = projects.filter((_, index) => index % 2 === 0);
+  const rightColumn = projects.filter((_, index) => index % 2 === 1);
+
   return (
     <section id="work" className="px-6 md:px-16 pt-8 md:pt-12 pb-20 md:pb-32">
       <div className="w-full">
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 xl:gap-8">
+        {/* Mobile/Tablet/Desktop: Single column in original order */}
+        <div className="flex xl:hidden flex-col gap-6">
           {projects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
+        </div>
+
+        {/* XL: Two columns */}
+        <div className="hidden xl:flex flex-row gap-8">
+          {/* Left Column */}
+          <div className="flex-1 flex flex-col gap-8">
+            {leftColumn.map((project) => {
+              const index = projects.indexOf(project);
+              return <ProjectCard key={project.id} project={project} index={index} />;
+            })}
+          </div>
+
+          {/* Right Column */}
+          <div className="flex-1 flex flex-col gap-8">
+            {rightColumn.map((project) => {
+              const index = projects.indexOf(project);
+              return <ProjectCard key={project.id} project={project} index={index} />;
+            })}
+          </div>
         </div>
       </div>
     </section>
@@ -32,11 +56,14 @@ function ProjectCard({ project, index }: ProjectCardProps) {
 
   const hasLink = project.link && project.link.trim() !== '';
 
+  // Create uneven grid: first project is 440px, second is 480px
+  const imageHeight = index === 0 ? 'h-[240px] md:h-[440px]' : 'h-[240px] md:h-[500px]';
+
   const content = (
     <>
       {/* Project Image */}
       <div
-        className="relative w-full h-[240px] md:h-[480px] mb-3 md:mb-6 overflow-hidden border border-black/5 dark:border-white/5 cursor-none"
+        className={`relative w-full ${imageHeight} mb-3 md:mb-6 overflow-hidden border border-black/5 dark:border-white/5 cursor-none`}
         onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -45,7 +72,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
           src={project.image}
           alt={project.title}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className={`object-cover transition-all duration-500 group-hover:scale-105 ${index === 2 ? 'group-hover:blur-[1px]' : ''}`}
         />
         {/* Cursor-following Tooltip */}
         <AnimatePresence>
