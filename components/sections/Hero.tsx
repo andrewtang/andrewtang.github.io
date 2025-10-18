@@ -2,26 +2,26 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { experience } from "@/data/content";
 import { useState } from "react";
+import dynamic from "next/dynamic";
+import { useCursorPosition } from "@/hooks";
+
+const HoverGif = dynamic(() => import("@/components/shared/HoverGif"), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function Hero() {
   const [showGif, setShowGif] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLSpanElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
+  const { position: mousePosition, handleMouseMove } = useCursorPosition();
 
   return (
-    <section className="flex items-center px-6 md:px-16 pt-20">
+    <section className="flex items-center px-6 md:px-16 pt-20 pb-8">
       <div className="w-full">
         {/* NOTE: Two-column layout can be restored by uncommenting desktop:grid-cols-2 below */}
-        <div className="grid grid-cols-1 gap-12 lg:gap-16 pt-[8vh] lg:pt-[16vh] items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 pt-[8vh] lg:pt-[24vh] items-start">
           {/* Left side - Main heading */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -30,7 +30,7 @@ export default function Hero() {
             className="max-w-[700px]"
           >
             <h1 className="text-[48px] md:text-5xl lg:text-6xl font-serif mb-6 overflow-visible" style={{ lineHeight: '1.1', letterSpacing: '-0.03em' }}>
-              I'm Andy, a product designer who enjoys {" "}
+              I'm <Link href="/about" className="hover:opacity-60 transition-opacity">Andy</Link>, a product designer who enjoys {" "}
               <span
                 className="relative inline-block group"
                 onMouseEnter={() => setShowGif(true)}
@@ -45,29 +45,11 @@ export default function Hero() {
                 </span>
                 {/* Hover GIF - follows cursor */}
                 {showGif && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{
-                      opacity: 1,
-                      scale: 1,
-                      x: mousePosition.x,
-                      y: mousePosition.y + 20
-                    }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.15, ease: "easeOut" }}
-                    className="absolute top-0 left-0 pointer-events-none z-10"
-                    style={{
-                      transform: `translate(${mousePosition.x}px, ${mousePosition.y + 20}px) translate(-50%, 0)`
-                    }}
-                  >
-                    <div className="relative w-[200px] h-[140px] rounded-[8px] overflow-hidden shadow-2xl border-2 border-white/20 dark:border-white/10">
-                      <img
-                        src="/images/building.gif"
-                        alt="Building animation"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </motion.div>
+                  <HoverGif
+                    src="/images/building.gif"
+                    alt="Building animation"
+                    mousePosition={mousePosition}
+                  />
                 )}
               </span>.
             </h1>

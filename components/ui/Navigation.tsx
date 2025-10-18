@@ -2,13 +2,16 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
 import AnimatedLink from "./AnimatedLink";
 
 export default function Navigation() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [nameHovered, setNameHovered] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,10 +44,10 @@ export default function Navigation() {
   }, [mobileMenuOpen]);
 
   const menuLinks = [
-    { href: "#work", label: "Work", strikethrough: true },
-    { href: "#canvas", label: "Canvas", strikethrough: true },
+    { href: "/", label: "Work", strikethrough: false },
+    { href: "#", label: "Labs", strikethrough: true },
     { href: "/about", label: "About", strikethrough: false },
-    { href: "mailto:hello@andrewtang.net", label: "Resume", strikethrough: true },
+    { href: "#", label: "Resume", strikethrough: true },
   ];
 
   return (
@@ -56,14 +59,53 @@ export default function Navigation() {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-150 bg-[#F1F1F1]/80 dark:bg-[#1a1a1a]/80 ${
           scrolled ? "backdrop-blur-md border-b border-border dark:border-white/10" : ""
         }`}
+        role="navigation"
+        aria-label="Main navigation"
       >
         <div className="px-6 md:px-16">
-          <div className="grid grid-cols-2 gap-12 lg:gap-16 items-center h-12 md:h-14">
+          <div className="grid grid-cols-2 gap-12 lg:gap-8 items-center h-12 md:h-14">
             <Link
               href="/"
-              className="text-sm font-mono uppercase tracking-wider hover:opacity-60 transition-opacity"
+              className="text-sm font-mono uppercase tracking-wider hover:opacity-60 transition-opacity relative inline-flex items-center"
+              onMouseEnter={() => setNameHovered(true)}
+              onMouseLeave={() => setNameHovered(false)}
             >
-              Andrew Tang
+              <motion.span
+                animate={{
+                  opacity: nameHovered ? 1 : 0,
+                  x: nameHovered ? 0 : -12,
+                  scale: nameHovered ? 1 : 0.5
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 20
+                }}
+                style={{
+                  display: "inline-block",
+                  transformOrigin: "right center",
+                  marginRight: nameHovered ? "0.5rem" : "0"
+                }}
+                className="text-base"
+              >
+                👋
+              </motion.span>
+              <motion.span
+                animate={{
+                  x: nameHovered ? 0 : -20
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 20
+                }}
+                style={{
+                  display: "inline-block",
+                  marginLeft: "4px"
+                }}
+              >
+                Andrew Tang
+              </motion.span>
             </Link>
 
             {/* Desktop Menu */}
@@ -75,6 +117,7 @@ export default function Navigation() {
                     href={link.href}
                     label={link.label}
                     strikethrough={link.strikethrough}
+                    isActive={pathname === link.href}
                     className="text-sm font-mono uppercase tracking-wider text-muted dark:text-muted-dark hover:text-black dark:hover:text-white transition-colors"
                   />
                 ))}
@@ -136,6 +179,7 @@ export default function Navigation() {
                     href={link.href}
                     label={link.label}
                     strikethrough={link.strikethrough}
+                    isActive={pathname === link.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className="text-3xl font-mono uppercase tracking-wider"
                   />

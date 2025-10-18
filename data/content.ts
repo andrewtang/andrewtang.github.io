@@ -1,4 +1,6 @@
-export const siteConfig = {
+import type { SiteConfig, AboutContent, Project, Experience } from '@/types';
+
+export const siteConfig: SiteConfig = {
   name: "Andrew Tang",
   title: "Andrew Tang — Product Designer",
   description: "Product Designer based in Melbourne, Australia",
@@ -12,37 +14,26 @@ export const siteConfig = {
   },
 };
 
-export const projects = [
-  {
-    id: 1,
-    title: "Project Title",
-    description: "Brief description of your project and the problem it solves",
-    image: "/images/project1.jpg",
-    tags: ["Design", "Product Strategy", "UX Research"],
-    link: "#",
-    year: "2024",
-  },
+export const projects: Project[] = [
   {
     id: 2,
-    title: "Another Project",
-    description: "Description of another project you've worked on",
-    image: "/images/project2.jpg",
+    title: "0 → 1",
+    description: "Betashares • Shipped 2024",
+    image: "/images/betashares.png",
     tags: ["UI Design", "Prototyping", "User Testing"],
-    link: "#",
-    year: "2023",
+    link: "",
   },
   {
-    id: 3,
-    title: "Case Study",
-    description: "A detailed case study of your design process",
-    image: "/images/project3.jpg",
-    tags: ["Research", "Design Systems", "Accessibility"],
-    link: "#",
-    year: "2023",
+    id: 1,
+    title: "Enhancing the servicing experience",
+    description: "Afterpay • Shipped 2022",
+    image: "/images/afterpay.png",
+    tags: ["Design", "Product Strategy", "UX Research"],
+    link: "",
   },
 ];
 
-export const experience = [
+export const experience: Experience[] = [
   {
     id: 1,
     company: "Betashares",
@@ -76,7 +67,7 @@ export const experience = [
   },
 ];
 
-export const about = {
+export const about: AboutContent = {
   tagline: "I'm a designer, builder, & rock climber",
   intro: "I think deeply about people, products, and how technology shapes the future. I'm currently spending much of my free time exploring how AI can expand what's possible in design.",
   personal: "Outside of work, I'm happiest when I'm outdoors, especially when I'm climbing. There's something about scaling a new route that brings out the best in me — I'm completely focused on the present and feel most alive. ",

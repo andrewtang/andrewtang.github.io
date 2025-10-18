@@ -4,8 +4,8 @@ import { siteConfig } from "@/data/content";
 
 export default function Footer() {
   return (
-    <footer className="py-12 px-6 md:px-16">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start lg:items-center">
+    <footer className="py-12 px-6 md:px-16" role="contentinfo">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-start lg:items-center">
         <div className="flex flex-col md:flex-row gap-4 md:gap-6">
           <a
             href={siteConfig.links.linkedin}

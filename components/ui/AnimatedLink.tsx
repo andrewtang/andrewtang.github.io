@@ -10,6 +10,7 @@ interface AnimatedLinkProps {
   className?: string;
   strikethrough?: boolean;
   onClick?: () => void;
+  isActive?: boolean;
 }
 
 export default function AnimatedLink({
@@ -18,9 +19,14 @@ export default function AnimatedLink({
   className = "",
   strikethrough = false,
   onClick,
+  isActive = false,
 }: AnimatedLinkProps) {
   const [isHovered, setIsHovered] = useState(false);
   const letters = label.split("");
+
+  const linkClassName = isActive
+    ? className.replace('text-muted dark:text-muted-dark', 'text-black dark:text-white')
+    : className;
 
   return (
     <Link
@@ -28,7 +34,7 @@ export default function AnimatedLink({
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`relative inline-block ${className}`}
+      className={`relative inline-block ${linkClassName}`}
     >
       <span className={`relative flex ${strikethrough ? "before:absolute before:left-0 before:right-0 before:top-1/2 before:h-[1px] before:bg-current" : ""}`}>
         {letters.map((letter, index) => (

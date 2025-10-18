@@ -2,31 +2,34 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
+import dynamic from "next/dynamic";
 import Navigation from "@/components/ui/Navigation";
 import Footer from "@/components/sections/Footer";
 import { about, siteConfig } from "@/data/content";
+import { useCursorPosition } from "@/hooks";
+
+const HoverGif = dynamic(() => import("@/components/shared/HoverGif"), {
+  ssr: false,
+  loading: () => null,
+});
+
+// Note: Client components can't export metadata directly
+// Metadata is handled in layout.tsx
 
 export default function AboutPage() {
   const [showGif, setShowGif] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLSpanElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
+  const { position: mousePosition, handleMouseMove } = useCursorPosition();
 
   return (
     <>
       <Navigation />
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         <section className="px-6 md:px-16 pt-20">
           <div className="w-full pt-[8vh] lg:pt-[16vh] pb-24">
             <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12 lg:gap-16">
               {/* Left Column - Text Content */}
-              <div className="space-y-12 max-w-[900px]">
+              <div className="space-y-12 max-w-[910px]">
                 {/* Tagline */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
@@ -34,7 +37,7 @@ export default function AboutPage() {
                   transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
                 >
                   <h1
-                    className="text-[40px] md:text-5xl lg:text-6xl font-serif mb-0 overflow-visible"
+                    className="text-[48px] md:text-5xl lg:text-6xl font-serif mb-0 overflow-visible"
                     style={{ lineHeight: '1.1', letterSpacing: '-0.03em' }}
                   >
                     I'm a designer, builder, &{" "}
@@ -52,31 +55,13 @@ export default function AboutPage() {
                       </span>
                       {/* Hover GIF - follows cursor */}
                       {showGif && (
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{
-                            opacity: 1,
-                            scale: 1,
-                            x: mousePosition.x,
-                            y: mousePosition.y + 20
-                          }}
-                          exit={{ opacity: 0, scale: 0.8 }}
-                          transition={{ duration: 0.15, ease: "easeOut" }}
-                          className="absolute top-0 left-0 pointer-events-none z-10"
-                          style={{
-                            transform: `translate(${mousePosition.x}px, ${mousePosition.y + 20}px) translate(-50%, 0)`
-                          }}
-                        >
-                          <div className="relative w-[200px] h-[140px] rounded-[8px] overflow-hidden shadow-2xl border-2 border-white/20 dark:border-white/10">
-                            <img
-                              src="/images/climbing.gif"
-                              alt="Climbing animation"
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-                        </motion.div>
+                        <HoverGif
+                          src="/images/climbing.gif"
+                          alt="Climbing animation"
+                          mousePosition={mousePosition}
+                        />
                       )}
-                    </span>
+                    </span>.
                   </h1>
                 </motion.div>
 
@@ -101,7 +86,16 @@ export default function AboutPage() {
                   transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
                 >
                   <p className="text-lg leading-relaxed">
-                    {about.personal}
+                    Outside of work, I'm happiest when I'm{" "}
+                    <a
+                      href="https://andrewtang.exposure.co/south-america"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium hover:opacity-60 transition-opacity underline decoration-1 underline-offset-4"
+                    >
+                      outdoors
+                    </a>
+                    , especially when I'm climbing. There's something about scaling a new route that brings out the best in me — I'm completely focused on the present and feel most alive.
                   </p>
                 </motion.div>
 
@@ -115,7 +109,7 @@ export default function AboutPage() {
                     {about.availability}{" "}
                     <a
                       href={siteConfig.links.email}
-                      className="hover:opacity-60 transition-opacity underline decoration-1 underline-offset-4"
+                      className="font-medium hover:opacity-60 transition-opacity underline decoration-1 underline-offset-4"
                     >
                       Reach out
                     </a>
@@ -141,11 +135,14 @@ export default function AboutPage() {
                       className={`relative aspect-[2/3] w-full lg:w-[180px] lg:-mr-16 transition-all duration-100 ease-out ${image.rotation} hover:!z-50 hover:scale-150 hover:rotate-0`}
                       style={{ zIndex: 2 - index }}
                     >
-                      <div className="w-full h-full bg-gray-100 rounded-lg overflow-hidden border-2 border-border dark:border-white/10">
-                        <img
+                      <div className="relative w-full h-full bg-gray-100 rounded-lg overflow-hidden border-2 border-border dark:border-white/10">
+                        <Image
                           src={image.src}
-                          alt={`Climbing image ${index + 1}`}
-                          className="w-full h-full object-cover"
+                          alt={`Andrew climbing - image ${index + 1}`}
+                          fill
+                          sizes="(max-width: 1024px) 33vw, 180px"
+                          className="object-cover"
+                          priority={index === 0}
                         />
                       </div>
                     </div>

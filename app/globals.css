@@ -23,6 +23,17 @@
     background-color: #FFE5B4;
     color: #0a0a0a;
   }
+
+  /* Focus styles for accessibility */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-black dark:outline-white;
+  }
+
+  /* Ensure interactive elements have clear focus states */
+  a:focus-visible,
+  button:focus-visible {
+    @apply outline-2 outline-offset-2 outline-black dark:outline-white rounded-sm;
+  }
 }
 
 @layer utilities {
