@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { experience } from "@/data/content";
@@ -29,6 +29,7 @@ export default function Hero() {
       const exp = experience[index];
       if (exp.logos) {
         next[index] = (next[index] + 1) % exp.logos.length;
+        console.log(`Updated index ${index} to ${next[index]}, company: ${exp.logos[next[index]].alt}`);
       }
       return next;
     });
@@ -113,7 +114,17 @@ export default function Hero() {
                                 className="inline rounded-md transition-all duration-100 ease-in-out group-hover:scale-110 group-hover:-rotate-12"
                               />
                             )}
-                            {exp.company}
+                            <AnimatePresence mode="wait">
+                              <motion.span
+                                key={exp.logos ? `${index}-${logoIndices[index]}` : exp.company}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                {exp.logos ? exp.logos[logoIndices[index]].alt : exp.company}
+                              </motion.span>
+                            </AnimatePresence>
                           </a>
                         ) : (
                           <span
@@ -132,7 +143,17 @@ export default function Hero() {
                                 className="inline rounded-md transition-all duration-100 ease-in-out group-hover:scale-110 group-hover:-rotate-12"
                               />
                             )}
-                            {exp.company}
+                            <AnimatePresence mode="wait">
+                              <motion.span
+                                key={exp.logos ? `${index}-${logoIndices[index]}` : exp.company}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                {exp.logos ? exp.logos[logoIndices[index]].alt : exp.company}
+                              </motion.span>
+                            </AnimatePresence>
                           </span>
                         )}
                       </div>
@@ -177,7 +198,17 @@ export default function Hero() {
                                 className="inline rounded-md transition-all duration-100 ease-in-out group-hover:scale-110 group-hover:-rotate-12"
                               />
                             )}
-                            {exp.company}
+                            <AnimatePresence mode="wait">
+                              <motion.span
+                                key={exp.logos ? `${index}-${logoIndices[index]}` : exp.company}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                {exp.logos ? exp.logos[logoIndices[index]].alt : exp.company}
+                              </motion.span>
+                            </AnimatePresence>
                           </a>
                         ) : (
                           <span
@@ -195,7 +226,17 @@ export default function Hero() {
                                 className="inline rounded-md transition-all duration-100 ease-in-out group-hover:scale-110 group-hover:-rotate-12"
                               />
                             )}
-                            {exp.company}
+                            <AnimatePresence mode="wait">
+                              <motion.span
+                                key={exp.logos ? `${index}-${logoIndices[index]}` : exp.company}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                {exp.logos ? exp.logos[logoIndices[index]].alt : exp.company}
+                              </motion.span>
+                            </AnimatePresence>
                           </span>
                         )}
                       </div>
@@ -213,7 +254,7 @@ export default function Hero() {
                     <div className="text-muted dark:text-muted-dark font-mono text-left">
                       {exp.period}
                     </div>
-                    <div className="text-left leading-[0]">
+                    <div className="text-left" style={{ lineHeight: '1' }}>
                       {exp.url ? (
                         <a
                           href={exp.url}
@@ -238,7 +279,17 @@ export default function Hero() {
                               className="inline rounded-md transition-all duration-100 ease-in-out group-hover:scale-110 group-hover:-rotate-12"
                             />
                           )}
-                          {exp.company}
+                          <AnimatePresence mode="wait">
+                            <motion.span
+                              key={exp.logos ? `${index}-${logoIndices[index]}` : exp.company}
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -10 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              {exp.logos ? exp.logos[logoIndices[index]].alt : exp.company}
+                            </motion.span>
+                          </AnimatePresence>
                         </a>
                       ) : (
                         <span
@@ -256,7 +307,17 @@ export default function Hero() {
                               className="inline rounded-md transition-all duration-100 ease-in-out group-hover:scale-110 group-hover:-rotate-12"
                             />
                           )}
-                          {exp.company}
+                          <AnimatePresence mode="wait">
+                            <motion.span
+                              key={exp.logos ? `${index}-${logoIndices[index]}` : exp.company}
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -10 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              {exp.logos ? exp.logos[logoIndices[index]].alt : exp.company}
+                            </motion.span>
+                          </AnimatePresence>
                         </span>
                       )}
                     </div>
