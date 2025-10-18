@@ -13,7 +13,7 @@ export default function Projects() {
   const rightColumn = projects.filter((_, index) => index % 2 === 1);
 
   return (
-    <section id="work" className="px-6 md:px-16 pt-8 md:pt-12 pb-20 md:pb-32">
+    <section id="work" className="px-6 md:px-16 pt-8 md:pt-12 pb-8 md:pb-24">
       <div className="w-full">
         {/* Mobile/Tablet/Desktop: Single column in original order */}
         <div className="flex xl:hidden flex-col gap-6">
@@ -57,12 +57,12 @@ function ProjectCard({ project, index }: ProjectCardProps) {
   const hasLink = project.link && project.link.trim() !== '';
 
   // Create uneven grid: first project is 440px, second is 480px
-  const imageHeight = index === 0 ? 'h-[240px] md:h-[440px]' : 'h-[240px] md:h-[500px]';
+  const imageHeight = index === 0 ? 'h-[240px] sm:h-[320px] md:h-[400px]' : 'h-[240px] sm:h-[320px] md:h-[400px] lg:h-[480px]';
 
   const content = (
     <>
       {/* Project Image Container - Wrapper for tooltip positioning */}
-      <div className="relative mb-3 md:mb-6">
+      <div className="relative mb-3">
         <div
           className={`relative w-full ${imageHeight} overflow-hidden border border-black/5 dark:border-white/5 cursor-none`}
           onMouseMove={handleMouseMove}
