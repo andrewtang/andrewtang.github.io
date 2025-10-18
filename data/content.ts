@@ -53,7 +53,7 @@ export const experience: Experience[] = [
   {
     id: 1,
     company: "Betashares",
-    role: "Principal Product Designer",
+    role: "Senior Product Designer",
     period: "2023 — Present",
     url: "https://www.betashares.com.au",
     logo: "/logos/betashares.svg",
