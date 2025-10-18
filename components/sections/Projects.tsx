@@ -61,20 +61,23 @@ function ProjectCard({ project, index }: ProjectCardProps) {
 
   const content = (
     <>
-      {/* Project Image */}
-      <div
-        className={`relative w-full ${imageHeight} mb-3 md:mb-6 overflow-hidden border border-black/5 dark:border-white/5 cursor-none`}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          className={`object-cover transition-all duration-500 group-hover:scale-105 ${index === 2 ? 'group-hover:blur-[1px]' : ''}`}
-        />
-        {/* Cursor-following Tooltip */}
+      {/* Project Image Container - Wrapper for tooltip positioning */}
+      <div className="relative mb-3 md:mb-6">
+        <div
+          className={`relative w-full ${imageHeight} overflow-hidden border border-black/5 dark:border-white/5 cursor-none`}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            className="object-cover transition-all duration-500 group-hover:scale-105"
+          />
+        </div>
+
+        {/* Cursor-following Tooltip - Outside overflow container */}
         <AnimatePresence>
           {isHovered && (
             <motion.div
