@@ -7,6 +7,7 @@ import { experience } from "@/data/content";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { useCursorPosition } from "@/hooks";
+import StackedLogoToggle from "@/components/ui/StackedLogoToggle";
 
 const HoverGif = dynamic(() => import("@/components/shared/HoverGif"), {
   ssr: false,
@@ -16,6 +17,22 @@ const HoverGif = dynamic(() => import("@/components/shared/HoverGif"), {
 export default function Hero() {
   const [showGif, setShowGif] = useState(false);
   const { position: mousePosition, handleMouseMove } = useCursorPosition();
+
+  // Track current logo index for each experience
+  const [logoIndices, setLogoIndices] = useState<number[]>(
+    experience.map(() => 0)
+  );
+
+  const handleLogoNext = (index: number) => {
+    setLogoIndices(prev => {
+      const next = [...prev];
+      const exp = experience[index];
+      if (exp.logos) {
+        next[index] = (next[index] + 1) % exp.logos.length;
+      }
+      return next;
+    });
+  };
 
   return (
     <section className="flex items-center px-6 md:px-16 pt-20 pb-8">
@@ -78,8 +95,16 @@ export default function Hero() {
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 hover:text-black dark:hover:text-white hover:opacity-60 transition-all group"
                             style={{ lineHeight: '1' }}
+                            onClick={(e) => {
+                              if (exp.logos) {
+                                e.preventDefault();
+                                handleLogoNext(index);
+                              }
+                            }}
                           >
-                            {exp.logo && (
+                            {exp.logos ? (
+                              <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} />
+                            ) : exp.logo && (
                               <Image
                                 src={exp.logo}
                                 alt={`${exp.company} logo`}
@@ -91,8 +116,14 @@ export default function Hero() {
                             {exp.company}
                           </a>
                         ) : (
-                          <span className="inline-flex items-center gap-2 group" style={{ lineHeight: '1' }}>
-                            {exp.logo && (
+                          <span
+                            className="inline-flex items-center gap-2 group cursor-pointer"
+                            style={{ lineHeight: '1' }}
+                            onClick={() => exp.logos && handleLogoNext(index)}
+                          >
+                            {exp.logos ? (
+                              <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} />
+                            ) : exp.logo && (
                               <Image
                                 src={exp.logo}
                                 alt={`${exp.company} logo`}
@@ -105,7 +136,11 @@ export default function Hero() {
                           </span>
                         )}
                       </div>
-                      <div className="text-muted dark:text-muted-dark flex items-center" style={{ lineHeight: '1' }}>
+                      <div
+                        className="text-muted dark:text-muted-dark flex items-center cursor-pointer hover:opacity-60 transition-opacity"
+                        style={{ lineHeight: '1' }}
+                        onClick={() => exp.logos && handleLogoNext(index)}
+                      >
                         {exp.role}
                       </div>
                     </div>
@@ -124,8 +159,16 @@ export default function Hero() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 hover:text-black dark:hover:text-white hover:opacity-60 transition-all group"
+                            onClick={(e) => {
+                              if (exp.logos) {
+                                e.preventDefault();
+                                handleLogoNext(index);
+                              }
+                            }}
                           >
-                            {exp.logo && (
+                            {exp.logos ? (
+                              <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} />
+                            ) : exp.logo && (
                               <Image
                                 src={exp.logo}
                                 alt={`${exp.company} logo`}
@@ -137,8 +180,13 @@ export default function Hero() {
                             {exp.company}
                           </a>
                         ) : (
-                          <span className="inline-flex items-center gap-2 group">
-                            {exp.logo && (
+                          <span
+                            className="inline-flex items-center gap-2 group cursor-pointer"
+                            onClick={() => exp.logos && handleLogoNext(index)}
+                          >
+                            {exp.logos ? (
+                              <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} />
+                            ) : exp.logo && (
                               <Image
                                 src={exp.logo}
                                 alt={`${exp.company} logo`}
@@ -151,7 +199,10 @@ export default function Hero() {
                           </span>
                         )}
                       </div>
-                      <div className="text-muted dark:text-muted-dark ml-8">
+                      <div
+                        className="text-muted dark:text-muted-dark ml-8 cursor-pointer hover:opacity-60 transition-opacity"
+                        onClick={() => exp.logos && handleLogoNext(index)}
+                      >
                         {exp.role}
                       </div>
                     </div>
@@ -169,8 +220,16 @@ export default function Hero() {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 hover:text-black dark:hover:text-white hover:opacity-60 transition-all group"
+                          onClick={(e) => {
+                            if (exp.logos) {
+                              e.preventDefault();
+                              handleLogoNext(index);
+                            }
+                          }}
                         >
-                          {exp.logo && (
+                          {exp.logos ? (
+                            <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} />
+                          ) : exp.logo && (
                             <Image
                               src={exp.logo}
                               alt={`${exp.company} logo`}
@@ -182,8 +241,13 @@ export default function Hero() {
                           {exp.company}
                         </a>
                       ) : (
-                        <span className="inline-flex items-center gap-2 group">
-                          {exp.logo && (
+                        <span
+                          className="inline-flex items-center gap-2 group cursor-pointer"
+                          onClick={() => exp.logos && handleLogoNext(index)}
+                        >
+                          {exp.logos ? (
+                            <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} />
+                          ) : exp.logo && (
                             <Image
                               src={exp.logo}
                               alt={`${exp.company} logo`}
@@ -196,7 +260,10 @@ export default function Hero() {
                         </span>
                       )}
                     </div>
-                    <div className="text-muted dark:text-muted-dark text-left">
+                    <div
+                      className="text-muted dark:text-muted-dark text-left cursor-pointer hover:opacity-60 transition-opacity"
+                      onClick={() => exp.logos && handleLogoNext(index)}
+                    >
                       {exp.role}
                     </div>
                   </div>

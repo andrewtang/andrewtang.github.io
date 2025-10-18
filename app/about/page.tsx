@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import Navigation from "@/components/ui/Navigation";
 import Footer from "@/components/sections/Footer";
 import { about, siteConfig } from "@/data/content";
 import { useCursorPosition } from "@/hooks";
@@ -23,7 +22,6 @@ export default function AboutPage() {
 
   return (
     <>
-      <Navigation />
       <main id="main-content" className="flex-1">
         <section className="px-6 md:px-16 pt-20">
           <div className="w-full pt-[8vh] lg:pt-[16vh] pb-24">

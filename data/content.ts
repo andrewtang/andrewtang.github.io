@@ -72,6 +72,14 @@ export const experience: Experience[] = [
     role: "Product Designer",
     period: "2012 — 2018",
     logo: "/logos/various.svg",
+    logos: [
+      { src: "/logos/various.svg", alt: "Various" },
+      { src: "/logos/auspost.svg", alt: "Australia Post" },
+      { src: "/logos/telstra.svg", alt: "Telstra" },
+      { src: "/logos/aussuper.svg", alt: "AustralianSuper" },
+      { src: "/logos/ibm.svg", alt: "IBM" },
+      { src: "/logos/latitude.svg", alt: "Latitude" },
+    ],
   },
 ];
 

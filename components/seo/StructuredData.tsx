@@ -6,7 +6,7 @@ export default function StructuredData() {
     "@type": "Person",
     name: "Andrew Tang",
     url: siteConfig.url,
-    jobTitle: "Principal Product Designer",
+    jobTitle: "Product Designer",
     worksFor: {
       "@type": "Organization",
       name: "Betashares",

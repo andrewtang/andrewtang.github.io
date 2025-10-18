@@ -5,4 +5,8 @@ export interface Experience {
   period: string;
   url?: string;
   logo?: string;
+  logos?: Array<{
+    src: string;
+    alt: string;
+  }>;
 }

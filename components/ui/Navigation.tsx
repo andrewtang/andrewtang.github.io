@@ -45,17 +45,15 @@ export default function Navigation() {
 
   const menuLinks = [
     { href: "/", label: "Work", strikethrough: false },
-    { href: "#", label: "Labs", strikethrough: true },
     { href: "/about", label: "About", strikethrough: false },
+    { href: "#", label: "Labs", strikethrough: true },
+    { href: "#", label: "Writing", strikethrough: true },
     { href: "#", label: "Resume", strikethrough: true },
   ];
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+      <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-150 bg-[#F1F1F1]/80 dark:bg-[#1a1a1a]/80 ${
           scrolled ? "backdrop-blur-md border-b border-border dark:border-white/10" : ""
         }`}
@@ -64,49 +62,52 @@ export default function Navigation() {
       >
         <div className="px-6 md:px-16">
           <div className="grid grid-cols-2 gap-12 lg:gap-8 items-center h-12 md:h-14">
-            <Link
-              href="/"
-              className="text-sm font-mono uppercase tracking-wider hover:opacity-60 transition-opacity relative inline-flex items-center"
-              onMouseEnter={() => setNameHovered(true)}
-              onMouseLeave={() => setNameHovered(false)}
-            >
-              <motion.span
-                animate={{
-                  opacity: nameHovered ? 1 : 0,
-                  x: nameHovered ? 0 : -12,
-                  scale: nameHovered ? 1 : 0.5
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 260,
-                  damping: 20
-                }}
-                style={{
-                  display: "inline-block",
-                  transformOrigin: "right center",
-                  marginRight: nameHovered ? "0.5rem" : "0"
-                }}
-                className="text-base"
+            <div className="flex items-center" style={{ lineHeight: '32px' }}>
+              <Link
+                href="/"
+                className="text-sm font-mono uppercase tracking-wider hover:opacity-60 transition-opacity relative inline-flex items-center"
+                onMouseEnter={() => setNameHovered(true)}
+                onMouseLeave={() => setNameHovered(false)}
+                style={{ lineHeight: '32px' }}
               >
-                👋
-              </motion.span>
-              <motion.span
-                animate={{
-                  x: nameHovered ? 0 : -20
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 260,
-                  damping: 20
-                }}
-                style={{
-                  display: "inline-block",
-                  marginLeft: "4px"
-                }}
-              >
-                Andrew Tang
-              </motion.span>
-            </Link>
+                <motion.span
+                  animate={{
+                    opacity: nameHovered ? 1 : 0,
+                    x: nameHovered ? 0 : -12,
+                    scale: nameHovered ? 1 : 0.5
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20
+                  }}
+                  style={{
+                    display: "inline-block",
+                    transformOrigin: "right center",
+                    marginRight: nameHovered ? "0.5rem" : "0"
+                  }}
+                  className="text-base"
+                >
+                  👋
+                </motion.span>
+                <motion.span
+                  animate={{
+                    x: nameHovered ? 0 : -20
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20
+                  }}
+                  style={{
+                    display: "inline-block",
+                    marginLeft: "4px"
+                  }}
+                >
+                  Andrew Tang
+                </motion.span>
+              </Link>
+            </div>
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-8 md:gap-10 justify-between">
@@ -155,7 +156,7 @@ export default function Navigation() {
             </div>
           </div>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>

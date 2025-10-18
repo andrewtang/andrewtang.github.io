@@ -6,6 +6,7 @@ import { siteConfig } from "@/data/content";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import StructuredData from "@/components/seo/StructuredData";
 import SkipToContent from "@/components/ui/SkipToContent";
+import Navigation from "@/components/ui/Navigation";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -96,6 +97,7 @@ export default function RootLayout({
       >
         <SkipToContent />
         <ThemeProvider>
+          <Navigation />
           {children}
         </ThemeProvider>
       </body>
