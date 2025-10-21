@@ -134,7 +134,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.15, delay: 0.05 }}
                       >
-                        Case Study Coming Soon
+                        {project.tooltipText || "Case Study Coming Soon"}
                       </motion.span>
                     </>
                   )}
