@@ -1,12 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import Footer from "@/components/sections/Footer";
 import { about, siteConfig } from "@/data/content";
-import { useCursorPosition } from "@/hooks";
+import { useCursorPosition, useHoverDelay } from "@/hooks";
 
 const HoverGif = dynamic(() => import("@/components/shared/HoverGif"), {
   ssr: false,
@@ -19,6 +19,13 @@ const HoverGif = dynamic(() => import("@/components/shared/HoverGif"), {
 export default function AboutPage() {
   const [showGif, setShowGif] = useState(false);
   const { position: mousePosition, handleMouseMove } = useCursorPosition();
+
+  // Tooltip state for each image
+  const [imageStates, setImageStates] = useState([
+    { position: { x: 0, y: 0 }, isHovered: false, showText: false },
+    { position: { x: 0, y: 0 }, isHovered: false, showText: false },
+    { position: { x: 0, y: 0 }, isHovered: false, showText: false },
+  ]);
 
   return (
     <>
@@ -135,27 +142,138 @@ export default function AboutPage() {
               >
                 <div className="flex flex-row gap-2 lg:gap-0 w-full lg:w-auto">
                   {[
-                    { src: "/images/andy-1.png", rotation: "lg:-rotate-2" },
-                    { src: "/images/andy-3.png", rotation: "lg:rotate-1" },
-                    { src: "/images/andy-2.png", rotation: "lg:rotate-2" },
-                  ].map((image, index) => (
-                    <div
-                      key={index}
-                      className={`relative aspect-[2/3] w-full lg:w-[180px] lg:-mr-16 transition-all duration-100 ease-out ${image.rotation} hover:!z-50 hover:scale-150 hover:rotate-0`}
-                      style={{ zIndex: 2 - index }}
-                    >
-                      <div className="relative w-full h-full bg-gray-100 rounded-lg overflow-hidden border-2 border-border dark:border-white/10">
-                        <Image
-                          src={image.src}
-                          alt={`Andrew climbing - image ${index + 1}`}
-                          fill
-                          sizes="(max-width: 1024px) 33vw, 180px"
-                          className="object-cover"
-                          priority={index === 0}
-                        />
+                    { src: "/images/andy-1.webp", rotation: "lg:-rotate-2", tooltip: "Not entirely sure what I'm looking at!" },
+                    { src: "/images/andy-3.webp", rotation: "lg:rotate-1", tooltip: "Climbing in Railay Beach, Thailand" },
+                    { src: "/images/andy-2.webp", rotation: "lg:rotate-2", tooltip: "Teaching a Design Systems course" },
+                  ].map((image, index) => {
+                    const state = imageStates[index];
+
+                    const handleMouseEnter = () => {
+                      setImageStates(prev => {
+                        const next = [...prev];
+                        next[index] = { ...next[index], isHovered: true };
+                        setTimeout(() => {
+                          setImageStates(prev => {
+                            const updated = [...prev];
+                            updated[index] = { ...updated[index], showText: true };
+                            return updated;
+                          });
+                        }, 200);
+                        return next;
+                      });
+                    };
+
+                    const handleMouseLeave = () => {
+                      setImageStates(prev => {
+                        const next = [...prev];
+                        next[index] = { ...next[index], isHovered: false, showText: false };
+                        return next;
+                      });
+                    };
+
+                    const handleImageMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      const x = e.clientX - rect.left;
+                      const y = e.clientY - rect.top;
+
+                      setImageStates(prev => {
+                        const next = [...prev];
+                        next[index] = { ...next[index], position: { x, y } };
+                        return next;
+                      });
+                    };
+
+                    return (
+                      <div
+                        key={index}
+                        className="relative aspect-[2/3] w-full lg:w-[180px] lg:-mr-16 group"
+                        style={{ zIndex: state.isHovered ? 50 : 2 - index }}
+                      >
+                        <div
+                          className={`relative w-full h-full bg-gray-100 rounded-lg overflow-hidden border-2 border-border dark:border-white/10 cursor-none transition-all duration-100 ease-out ${image.rotation} group-hover:scale-150 group-hover:rotate-0`}
+                          onMouseMove={handleImageMouseMove}
+                          onMouseEnter={handleMouseEnter}
+                          onMouseLeave={handleMouseLeave}
+                        >
+                          <Image
+                            src={image.src}
+                            alt={`Andrew climbing - image ${index + 1}`}
+                            fill
+                            sizes="(max-width: 1024px) 33vw, 180px"
+                            className="object-cover"
+                            priority={index === 0}
+                          />
+                        </div>
+
+                        {/* Cursor-following Tooltip - Outside scaling container */}
+                        <AnimatePresence>
+                          {state.isHovered && (
+                            <motion.div
+                              className="absolute pointer-events-none z-[100]"
+                              style={{
+                                left: `${state.position.x}px`,
+                                top: `${state.position.y}px`,
+                              }}
+                              initial={{ scale: 0.8, opacity: 0 }}
+                              animate={{ scale: 1, opacity: 1 }}
+                              exit={{ scale: 0.8, opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <motion.div
+                                className="flex items-center gap-2 bg-black dark:bg-white rounded-full shadow-lg overflow-hidden"
+                                style={{
+                                  transform: 'translate(-50%, -50%)',
+                                }}
+                                initial={{ width: '24px', height: '24px' }}
+                                animate={
+                                  state.showText
+                                    ? { width: 'auto', height: 'auto' }
+                                    : { width: '24px', height: '24px' }
+                                }
+                                transition={{
+                                  duration: 0.3,
+                                  ease: [0.4, 0, 0.2, 1]
+                                }}
+                              >
+                                <div className={`flex items-center gap-2 ${state.showText ? 'px-3 py-2' : 'p-0'}`}>
+                                  {state.showText && (
+                                    <>
+                                      <motion.svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="18"
+                                        height="18"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        className="text-white dark:text-black flex-shrink-0"
+                                        initial={{ opacity: 0, scale: 0.5 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ duration: 0.2 }}
+                                      >
+                                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                                        <circle cx="12" cy="13" r="4"/>
+                                      </motion.svg>
+                                      <motion.span
+                                        className="text-white dark:text-black font-mono font-medium text-xs uppercase tracking-wider whitespace-nowrap"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ duration: 0.15, delay: 0.05 }}
+                                      >
+                                        {image.tooltip}
+                                      </motion.span>
+                                    </>
+                                  )}
+                                </div>
+                              </motion.div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </motion.div>
             </div>
