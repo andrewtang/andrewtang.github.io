@@ -394,7 +394,7 @@ export default function BayerDitheringDemo() {
         className="hidden md:block absolute bottom-12 left-12 z-10"
       >
         <a
-          href="https://github.com/andrewtang/bayer-dithering-webgl-demo"
+          href="https://github.com/zavalit/bayer-dithering-webgl-demo"
           target="_blank"
           rel="noopener noreferrer"
           className="text-xs font-mono text-white/30 hover:text-white/60 transition-colors uppercase tracking-wider"
