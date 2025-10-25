@@ -32,6 +32,7 @@ const config: Config = {
         "slide-up": "slide-up 0.6s ease-out",
         "scale-in": "scale-in 0.3s ease-out",
         "gradient": "gradient 4s ease-in-out infinite",
+        "chroma-shift": "chroma-shift 3s ease-in-out infinite",
       },
       keyframes: {
         "fade-in": {
@@ -49,6 +50,20 @@ const config: Config = {
         "gradient": {
           "0%, 100%": { backgroundPosition: "0% 50%" },
           "50%": { backgroundPosition: "100% 50%" },
+        },
+        "chroma-shift": {
+          "0%, 100%": {
+            textShadow: "2px 0 0 rgba(255, 0, 0, 0.5), -2px 0 0 rgba(0, 255, 255, 0.5)",
+          },
+          "25%": {
+            textShadow: "-2px 1px 0 rgba(255, 0, 0, 0.6), 2px -1px 0 rgba(0, 255, 255, 0.6)",
+          },
+          "50%": {
+            textShadow: "2px -1px 0 rgba(255, 0, 0, 0.4), -2px 1px 0 rgba(0, 255, 255, 0.4)",
+          },
+          "75%": {
+            textShadow: "-1px -2px 0 rgba(255, 0, 0, 0.7), 1px 2px 0 rgba(0, 255, 255, 0.7)",
+          },
         },
       },
       backgroundSize: {
