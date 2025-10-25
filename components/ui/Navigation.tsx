@@ -46,10 +46,15 @@ export default function Navigation() {
   const menuLinks = [
     { href: "/", label: "Work", strikethrough: false },
     { href: "/about", label: "About", strikethrough: false },
-    { href: "#", label: "Labs", strikethrough: true },
+    { href: "/labs", label: "Labs", strikethrough: false },
     { href: "#", label: "Writing", strikethrough: true },
     { href: "#", label: "Resume", strikethrough: true },
   ];
+
+  // Hide navigation on specific lab pages
+  if (pathname?.startsWith('/labs/0')) {
+    return null;
+  }
 
   return (
     <>

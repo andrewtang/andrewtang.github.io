@@ -1,4 +1,4 @@
-import type { SiteConfig, AboutContent, Project, Experience } from '@/types';
+import type { SiteConfig, AboutContent, Project, Experience, Lab } from '@/types';
 
 export const siteConfig: SiteConfig = {
   name: "Andrew Tang",
@@ -108,3 +108,16 @@ export const about: AboutContent = {
   personal: "Outside of work, I'm happiest when I'm outdoors, especially when I'm climbing. There's something about scaling a new route that brings out the best in me — I'm completely focused on the present and feel most alive. ",
   availability: "I'm always keen on connecting with like-minded individuals.",
 };
+
+export const labs: Lab[] = [
+  {
+    id: 1,
+    title: "Bayer Dithering Playground",
+    description: "An interactive WebGL shader that applies Bayer dithering effects with click-to-spawn ripples",
+    status: "in-progress",
+    started: "October 2025",
+    tags: ["WebGL", "Three.js", "Shaders", "GLSL"],
+    link: "/labs/01",
+    github: "https://github.com/andrewtang/bayer-dithering-webgl-demo",
+  },
+];
