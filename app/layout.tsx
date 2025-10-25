@@ -91,6 +91,21 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <StructuredData />
+        {/* Google Analytics */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-GZCL2QX0ZQ"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-GZCL2QX0ZQ');
+            `,
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${newsreader.variable} ${geistMono.variable} antialiased bg-[#F1F1F1] text-black dark:bg-[#1a1a1a] dark:text-white transition-colors duration-150 flex flex-col min-h-screen`}
