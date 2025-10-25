@@ -5,9 +5,9 @@ import { siteConfig } from "@/data/content";
 
 export const metadata: Metadata = {
   title: "Labs",
-  description: "Experimental projects and prototypes by Andrew Tang",
+  description: "Experimental projects and prototypes",
   openGraph: {
-    title: `Labs | ${siteConfig.name}`,
+    title: `Labs — ${siteConfig.name}`,
     description: "Experimental projects and prototypes",
     url: `${siteConfig.url}/labs`,
   },

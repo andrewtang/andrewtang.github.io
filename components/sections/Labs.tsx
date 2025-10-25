@@ -17,10 +17,10 @@ export default function Labs() {
           className="mb-16 md:mb-24"
         >
           <p className="text-[40px] md:text-4xl lg:text-5xl font-serif mb-6 overflow-visible max-w-[940px]" style={{ lineHeight: '1.1', letterSpacing: '-0.03em' }}>
-            A space where I periodically explore the convergence of design, technology, and creativity.
+          A space for experiments at the intersection of design, technology, and creativity.
           </p>
           <p className="text-xs md:text-sm font-mono text-muted dark:text-muted-dark">
-            A collection of original and open source projects
+          Collection of original and open source projects
           </p>
         </motion.div>
 
