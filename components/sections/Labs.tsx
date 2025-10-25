@@ -86,7 +86,7 @@ function LabCard({ lab, index }: LabCardProps) {
       transition={{ duration: 0.6, delay: index * 0.05 }}
     >
       {hasLink ? (
-        <Link href={lab.link} className="block">
+        <Link href={lab.link!} className="block">
           {content}
         </Link>
       ) : (
