@@ -250,7 +250,7 @@ export default function Hero() {
                   </div>
 
                   {/* Desktop: Three columns */}
-                  <div className="hidden lg:grid grid-cols-[160px_140px_1fr] gap-x-8 items-center">
+                  <div className="hidden lg:grid grid-cols-[160px_140px_1fr] gap-x-8 items-center text-[15px]">
                     <div className="text-muted dark:text-muted-dark font-mono text-left">
                       {exp.period}
                     </div>
