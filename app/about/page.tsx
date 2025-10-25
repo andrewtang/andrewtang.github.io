@@ -31,8 +31,8 @@ export default function AboutPage() {
     <>
       <main id="main-content" className="flex-1">
         <section className="px-6 md:px-16 pt-20">
-          <div className="w-full pt-[8vh] lg:pt-[16vh] pb-24">
-            <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12 lg:gap-16">
+          <div className="w-full pt-[8vh] lg:pt-[12vh] xl:pt-[16vh] pb-24">
+            <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12 lg:gap-16 lg:items-start">
               {/* Left Column - Text Content */}
               <div className="space-y-12 max-w-[920px]">
                 {/* Tagline */}
@@ -134,13 +134,14 @@ export default function AboutPage() {
               </div>
 
               {/* Right Column - Stacked Image Gallery */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-                className="flex justify-center lg:justify-start items-start lg:pt-32 lg:pr-24"
-              >
-                <div className="flex flex-row gap-2 lg:gap-0 w-full lg:w-auto">
+              <div className="lg:sticky lg:top-56 lg:mt-32">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+                  className="flex justify-center lg:justify-start items-start lg:pr-24"
+                >
+                  <div className="flex flex-row gap-2 lg:gap-0 w-full lg:w-auto">
                   {[
                     { src: "/images/andy-1.webp", rotation: "lg:-rotate-2", tooltip: "This is me :)" },
                     { src: "/images/andy-3.webp", rotation: "lg:rotate-1", tooltip: "Railay Beach, Thailand" },
@@ -274,8 +275,9 @@ export default function AboutPage() {
                       </div>
                     );
                   })}
-                </div>
-              </motion.div>
+                  </div>
+                </motion.div>
+              </div>
             </div>
           </div>
         </section>

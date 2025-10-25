@@ -39,7 +39,7 @@ export default function Hero() {
     <section className="flex items-center px-6 md:px-16 pt-20 pb-8">
       <div className="w-full">
         {/* NOTE: Two-column layout can be restored by uncommenting desktop:grid-cols-2 below */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 xl:gap-8 pt-[8vh] lg:pt-[16vh] items-start">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 xl:gap-8 pt-[8vh] lg:pt-[12vh] xl:pt-[16vh] items-start">
           {/* Left side - Main heading */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
