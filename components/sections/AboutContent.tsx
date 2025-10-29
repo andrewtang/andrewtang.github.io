@@ -181,7 +181,7 @@ export default function AboutContent() {
                 return (
                   <div
                     key={index}
-                    className="relative aspect-[2/3] w-full lg:w-[180px] lg:-mr-16 group"
+                    className="relative aspect-[2/3] w-full lg:w-[180px] lg:-mr-8 group"
                     style={{ zIndex: state.isHovered ? 50 : 2 - index }}
                   >
                     <div
