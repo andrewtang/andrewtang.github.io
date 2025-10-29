@@ -133,7 +133,7 @@ export default function AboutContent() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-              className="flex justify-center lg:justify-start items-start lg:pr-24"
+              className="flex justify-center lg:justify-start items-start lg:pr-4"
             >
               <div className="flex flex-row gap-2 lg:gap-0 w-full lg:w-auto">
               {[
