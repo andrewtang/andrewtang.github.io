@@ -204,7 +204,7 @@ export default function AboutContent() {
                     <AnimatePresence>
                       {state.isHovered && (
                         <motion.div
-                          className="absolute pointer-events-none z-[100]"
+                          className="absolute pointer-events-none z-[100] will-change-transform"
                           style={{
                             left: `${state.position.x}px`,
                             top: `${state.position.y}px`,
@@ -212,12 +212,12 @@ export default function AboutContent() {
                           initial={{ scale: 0.8, opacity: 0 }}
                           animate={{ scale: 1, opacity: 1 }}
                           exit={{ scale: 0.8, opacity: 0 }}
-                          transition={{ duration: 0.2 }}
+                          transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
                         >
                           <motion.div
-                            className="flex items-center gap-2 bg-black dark:bg-white rounded-full shadow-lg overflow-hidden"
+                            className="flex items-center gap-2 bg-black dark:bg-white rounded-full shadow-lg overflow-hidden will-change-transform"
                             style={{
-                              transform: 'translate(-50%, -50%)',
+                              transform: 'translate3d(-50%, -50%, 0)',
                             }}
                             initial={{ width: '24px', height: '24px' }}
                             animate={
@@ -226,7 +226,7 @@ export default function AboutContent() {
                                 : { width: '24px', height: '24px' }
                             }
                             transition={{
-                              duration: 0.3,
+                              duration: 0.25,
                               ease: [0.4, 0, 0.2, 1]
                             }}
                           >

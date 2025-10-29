@@ -5,6 +5,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
@@ -12,6 +13,7 @@
     font-family: var(--font-geist-sans), system-ui, sans-serif;
     background-color: #F1F1F1;
     font-size: 16px;
+    overflow-x: hidden;
   }
 
   ::selection {
