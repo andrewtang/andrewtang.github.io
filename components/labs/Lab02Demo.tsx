@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 export default function Lab02Demo() {
   const [displayText, setDisplayText] = useState("");
@@ -48,10 +49,10 @@ export default function Lab02Demo() {
     return () => clearTimeout(startDelay);
   }, []);
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative w-full h-screen overflow-hidden bg-[#f5f0ed] dark:bg-[#0a0a0a] transition-colors duration-300">
       {/* Base Gradient Background */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 dark:opacity-100 opacity-100 transition-opacity duration-300"
         style={{
           background: `
             linear-gradient(180deg,
@@ -65,9 +66,25 @@ export default function Lab02Demo() {
         }}
       />
 
+      {/* Dark mode gradient */}
+      <div
+        className="absolute inset-0 opacity-0 dark:opacity-100 transition-opacity duration-300"
+        style={{
+          background: `
+            linear-gradient(180deg,
+              #0a0a0a 0%,
+              #0f0f0f 30%,
+              #121212 50%,
+              #0d0d0d 70%,
+              #0a0a0a 100%
+            )
+          `,
+        }}
+      />
+
       {/* Subtle color layers with heavy blur */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 dark:opacity-30 transition-opacity duration-300"
         style={{
           background: `
             radial-gradient(ellipse 1000px 800px at 50% 30%, rgba(210, 200, 210, 0.15) 0%, transparent 60%),
@@ -95,10 +112,20 @@ export default function Lab02Demo() {
       >
         <Link
           href="/labs"
-          className="inline-block text-sm font-mono uppercase tracking-wider text-black/60 hover:text-black transition-colors"
+          className="inline-block text-sm font-mono uppercase tracking-wider text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white transition-colors"
         >
           ← Labs
         </Link>
+      </motion.div>
+
+      {/* Theme Toggle - Top Right */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        className="absolute top-6 right-6 md:top-12 md:right-12 z-50"
+      >
+        <ThemeToggle />
       </motion.div>
 
       {/* Chat Interface - Centered */}
@@ -116,16 +143,16 @@ export default function Lab02Demo() {
 
           {/* Chat Input Box - Fixed position */}
           <div
-            className="bg-white rounded-lg overflow-hidden pointer-events-auto relative"
+            className="bg-white dark:bg-[#2a2a2a] rounded-lg overflow-hidden pointer-events-auto relative z-0 transition-colors duration-300"
             style={{
               outline: '.5px solid rgba(0, 0, 0, .075)',
               boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06)',
-              transition: 'box-shadow .24s cubic-bezier(.25, .46, .45, .94), outline .24s cubic-bezier(.25, .46, .45, .94)'
+              transition: 'box-shadow .24s cubic-bezier(.25, .46, .45, .94), outline .24s cubic-bezier(.25, .46, .45, .94), background-color 0.3s'
             }}
           >
             {/* Input Content */}
             <div className="px-4 py-3 min-h-[60px]">
-              <p className="text-black/90" style={{ fontSize: '15px' }}>
+              <p className="text-black/90 dark:text-white/90 transition-colors duration-300" style={{ fontSize: '15px' }}>
                 {displayText.split('').map((char, index) => {
                   // First 5 characters are "@andy"
                   const isAtAndy = index < 5;
@@ -142,18 +169,18 @@ export default function Lab02Demo() {
             </div>
 
             {/* Toolbar */}
-            <div className="flex items-center gap-2 px-2 py-2 border-t border-black/5">
-              <button className="w-7 h-7 flex items-center justify-center text-black/40 hover:text-black/60 hover:bg-black/5 transition-colors text-base font-medium rounded-md">
+            <div className="flex items-center gap-2 px-2 py-2 border-t border-black/5 dark:border-white/10 transition-colors duration-300">
+              <button className="w-7 h-7 flex items-center justify-center text-black/40 hover:text-black/60 hover:bg-black/5 dark:text-white/40 dark:hover:text-white/60 dark:hover:bg-white/5 transition-colors text-base font-medium rounded-md">
                 @
               </button>
 
-              <button className="w-7 h-7 flex items-center justify-center text-black/40 hover:text-black/60 hover:bg-black/5 transition-colors rounded-md">
+              <button className="w-7 h-7 flex items-center justify-center text-black/40 hover:text-black/60 hover:bg-black/5 dark:text-white/40 dark:hover:text-white/60 dark:hover:bg-white/5 transition-colors rounded-md">
                 <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 7h10M5 10h6M5 13h8"/>
                 </svg>
               </button>
 
-              <button className="w-7 h-7 flex items-center justify-center text-black/40 hover:text-black/60 hover:bg-black/5 transition-colors rounded-md">
+              <button className="w-7 h-7 flex items-center justify-center text-black/40 hover:text-black/60 hover:bg-black/5 dark:text-white/40 dark:hover:text-white/60 dark:hover:bg-white/5 transition-colors rounded-md">
                 <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M10 5v10M5 10h10"/>
                 </svg>
@@ -161,7 +188,7 @@ export default function Lab02Demo() {
 
               <div className="flex-1"></div>
 
-              <button className="w-7 h-7 flex items-center justify-center text-black/40 hover:text-black/60 hover:bg-black/5 transition-colors rounded-md">
+              <button className="w-7 h-7 flex items-center justify-center text-black/40 hover:text-black/60 hover:bg-black/5 dark:text-white/40 dark:hover:text-white/60 dark:hover:bg-white/5 transition-colors rounded-md">
                 <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M10 15V5m0 0l-5 5m5-5l5 5"/>
                 </svg>
@@ -178,7 +205,7 @@ export default function Lab02Demo() {
                   <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" fill="white"/>
                 </svg>
               </div>
-              <h2 className="text-lg font-semibold text-black/90">andy</h2>
+              <h2 className="text-lg font-semibold text-black/90 dark:text-white/90 transition-colors duration-300">andy</h2>
             </div>
 
             {/* Response Text */}
@@ -188,14 +215,14 @@ export default function Lab02Demo() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
               >
-                <p className="text-black/70 pl-1 ml-10 mb-3" style={{ fontSize: '15px' }}>
+                <p className="text-black/70 dark:text-white/70 pl-1 ml-10 mb-3 transition-colors duration-300" style={{ fontSize: '15px' }}>
                   {displayResponse}
                 </p>
 
                 {/* Thinking Indicator */}
                 {showThinking && (
                   <div className="pl-1 ml-10 mb-3 flex items-center">
-                    <span className="text-black/40 text-xs">
+                    <span className="text-black/40 dark:text-white/40 text-xs transition-colors duration-300">
                       {isTypingComplete ? (
                         "Thought for 4 seconds"
                       ) : (
@@ -220,7 +247,7 @@ export default function Lab02Demo() {
                         </>
                       )}
                     </span>
-                    <span className="text-black/40 text-xs ml-auto">
+                    <span className="text-black/40 dark:text-white/40 text-xs ml-auto transition-colors duration-300">
                       {isTypingComplete ? "22:01" : "22:00"}
                     </span>
                   </div>

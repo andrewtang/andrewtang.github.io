@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function Lab02Page() {
   return (
-    <main id="main-content" className="flex-1">
+    <main id="main-content" className="fixed inset-0 w-full h-screen">
       <Lab02Demo />
     </main>
   );
