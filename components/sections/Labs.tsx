@@ -108,7 +108,7 @@ function LabCard({ lab, index }: LabCardProps) {
   const hasLink = lab.link && lab.link.trim() !== '';
 
   const content = (
-    <div className="group py-6 md:py-8 border-t border-b border-border dark:border-white/10 hover:opacity-60 transition-opacity">
+    <div className="group py-6 md:py-8 border-t border-border dark:border-white/10 hover:opacity-60 transition-opacity">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8">
         {/* Number */}
         <div className="md:col-span-2">

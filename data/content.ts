@@ -120,4 +120,13 @@ export const labs: Lab[] = [
     link: "/labs/01",
     github: "https://github.com/andrewtang/bayer-dithering-webgl-demo",
   },
+  {
+    id: 2,
+    title: "AI Chat Interface",
+    description: "A modern chat interface with animated typing effects and gradient hover states",
+    status: "in-progress",
+    started: "October 2025",
+    tags: ["React", "Framer Motion", "TypeScript"],
+    link: "/labs/02",
+  },
 ];
