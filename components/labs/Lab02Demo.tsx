@@ -10,6 +10,8 @@ export default function Lab02Demo() {
   const [displayResponse, setDisplayResponse] = useState("");
   const [showThinking, setShowThinking] = useState(false);
   const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [showActionMenu, setShowActionMenu] = useState(false);
+  const [isActionMenuExpanded, setIsActionMenuExpanded] = useState(true);
   const fullText = "@andy explain to my plants why I'm a terrible parent";
   const responseText = "I have the memory of a goldfish, so sometimes I forget to water you and sometimes I water you twice, plus last week I watered a fake plant for four days before noticing.";
 
@@ -36,7 +38,14 @@ export default function Lab02Demo() {
                 }
               } else {
                 clearInterval(responseTimer);
-                setIsTypingComplete(true);
+                // Show action menu after typing completes with delay
+                setTimeout(() => {
+                  setShowActionMenu(true);
+                  // Show thought indicator after action menu appears
+                  setTimeout(() => {
+                    setIsTypingComplete(true);
+                  }, 300);
+                }, 2000);
               }
             }, 20);
           }, 300); // Small delay between animations
@@ -130,20 +139,21 @@ export default function Lab02Demo() {
 
       {/* Chat Interface - Centered */}
       <div className="absolute inset-0 flex items-center justify-center z-10 px-6" style={{ paddingTop: '35vh' }}>
-        <div className="w-full max-w-xl relative group">
-          {/* Hover gradient background - behind chat box */}
-          <div
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-lg"
-            style={{
-              background: 'linear-gradient(#f6d15e4d 0%, #ff7aff4d 48.56%, #8f9dff4d 100%)',
-              transform: 'scale(1.02)',
-              filter: 'blur(20px)'
-            }}
-          />
-
+        <div className="w-full max-w-xl relative">
           {/* Chat Input Box - Fixed position */}
-          <div
-            className="bg-white dark:bg-[#2a2a2a] rounded-lg overflow-hidden pointer-events-auto relative z-0 transition-colors duration-300"
+          <div className="relative group">
+            {/* Hover gradient background - behind chat box */}
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-lg"
+              style={{
+                background: 'linear-gradient(#f6d15e4d 0%, #ff7aff4d 48.56%, #8f9dff4d 100%)',
+                transform: 'scale(1.02)',
+                filter: 'blur(20px)'
+              }}
+            />
+
+            <div
+              className="bg-white dark:bg-[#2a2a2a] rounded-lg overflow-hidden pointer-events-auto relative z-0 transition-colors duration-300"
             style={{
               outline: '.5px solid rgba(0, 0, 0, .075)',
               boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06)',
@@ -194,6 +204,7 @@ export default function Lab02Demo() {
                 </svg>
               </button>
             </div>
+            </div>
           </div>
 
           {/* Messages above chat box - Absolutely positioned */}
@@ -219,9 +230,76 @@ export default function Lab02Demo() {
                   {displayResponse}
                 </p>
 
+                {/* Action Menu */}
+                {showActionMenu && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.6,
+                      ease: [0.16, 1, 0.3, 1]
+                    }}
+                    className="pl-1 ml-10 mt-3"
+                  >
+                    <button
+                      onClick={() => setIsActionMenuExpanded(!isActionMenuExpanded)}
+                      className="w-full backdrop-blur-sm border border-black/10 dark:border-white/10 rounded-lg overflow-hidden transition-all duration-200 bg-white/50 dark:bg-white/10"
+                    >
+                      {/* Header */}
+                      <div className="flex items-center gap-2 px-3 py-2.5">
+                        <div className="w-5 h-5 rounded bg-[#5B9FED] flex items-center justify-center flex-shrink-0">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L12 6M12 18L12 22M6 12L2 12M22 12L18 12M17.657 6.343L15.536 8.464M8.464 15.536L6.343 17.657M17.657 17.657L15.536 15.536M8.464 8.464L6.343 6.343"
+                              stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                          </svg>
+                        </div>
+                        <span className="text-sm font-medium text-black/90 dark:text-white/90 flex-1 text-left">
+                          Plant Watering Schedule V1
+                        </span>
+                        <motion.svg
+                          animate={{ rotate: isActionMenuExpanded ? 180 : 0 }}
+                          transition={{ duration: 0.2 }}
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          className="text-black/40 dark:text-white/40"
+                        >
+                          <path d="M19 9l-7 7-7-7" />
+                        </motion.svg>
+                      </div>
+
+                      {/* Expanded Content */}
+                      {isActionMenuExpanded && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="border-t border-black/5 dark:border-white/10 px-3 py-3 bg-black/[0.02] dark:bg-black/20"
+                        >
+                          <p className="text-sm text-black/70 dark:text-white/80 mb-3">
+                            Would you like me to set up a watering schedule to help you remember?
+                          </p>
+                          <div className="flex gap-2">
+                            <button className="flex-1 px-3 py-1.5 bg-[#5B9FED] hover:bg-[#4A8FDC] text-white text-sm font-medium rounded transition-colors">
+                              Yes, please
+                            </button>
+                            <button className="flex-1 px-3 py-1.5 bg-black/10 dark:bg-white/10 hover:bg-black/15 dark:hover:bg-white/15 text-black/70 dark:text-white/80 text-sm font-medium rounded transition-colors">
+                              No thanks
+                            </button>
+                          </div>
+                        </motion.div>
+                      )}
+                    </button>
+                  </motion.div>
+                )}
+
                 {/* Thinking Indicator */}
                 {showThinking && (
-                  <div className="pl-1 ml-10 mb-3 flex items-center">
+                  <div className="pl-1 ml-10 mt-3 flex items-center">
                     <span className="text-black/40 dark:text-white/40 text-xs transition-colors duration-300">
                       {isTypingComplete ? (
                         "Thought for 4 seconds"
