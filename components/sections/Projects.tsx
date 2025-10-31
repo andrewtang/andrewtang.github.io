@@ -57,7 +57,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
   const hasLink = project.link && project.link.trim() !== '';
 
   // Create uneven grid: first project is 440px, second is 480px
-  const imageHeight = index === 0 ? 'h-[240px] sm:h-[320px] md:h-[400px]' : 'h-[240px] sm:h-[320px] md:h-[400px] lg:h-[480px]';
+  const imageHeight = index === 0 ? 'h-[240px] sm:h-[320px] md:h-[400px] lg:h-[420px]' : 'h-[240px] sm:h-[320px] md:h-[400px] lg:h-[480px]';
 
   const content = (
     <>
