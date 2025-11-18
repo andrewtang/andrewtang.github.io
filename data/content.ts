@@ -129,4 +129,13 @@ export const labs: Lab[] = [
     tags: ["React", "Framer Motion", "TypeScript"],
     link: "/labs/02",
   },
+  {
+    id: 3,
+    title: "Task Manager Demo",
+    description: "An automated task management interface with priority levels and real-time statistics",
+    status: "in-progress",
+    started: "November 2025",
+    tags: ["React", "Framer Motion", "Animation"],
+    link: "/labs/03/product_demo.html",
+  },
 ];
