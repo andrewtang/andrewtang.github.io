@@ -136,6 +136,6 @@ export const labs: Lab[] = [
     status: "in-progress",
     started: "November 2025",
     tags: ["React", "Framer Motion", "Animation"],
-    link: "/labs/03/product_demo.html",
+    link: "/labs/03",
   },
 ];
