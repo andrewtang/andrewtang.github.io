@@ -93,8 +93,9 @@ const StackedLogoToggle = forwardRef<StackedLogoToggleRef, StackedLogoToggleProp
             exit="exit"
             transition={{
               type: 'spring',
-              stiffness: 600,
-              damping: 35,
+              stiffness: 500,
+              damping: 30,
+              mass: 0.8,
             }}
             className="absolute inset-0"
             style={{

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
 import AnimatedLink from "./AnimatedLink";
+import TimeDisplay from "./TimeDisplay";
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -66,11 +67,11 @@ export default function Navigation() {
         aria-label="Main navigation"
       >
         <div className="px-6 md:px-16">
-          <div className="grid grid-cols-2 gap-12 lg:gap-8 items-center h-12 md:h-14">
-            <div className="flex items-center" style={{ lineHeight: '32px' }}>
+          <div className="grid grid-cols-2 gap-4 md:gap-6 xl:grid-cols-2 xl:gap-8 items-center h-12 md:h-14">
+            <div className="flex items-center min-w-0" style={{ lineHeight: '32px' }}>
               <Link
                 href="/"
-                className="text-sm font-mono uppercase tracking-wider hover:opacity-60 transition-opacity relative inline-flex items-center"
+                className="text-sm font-mono uppercase tracking-wider hover:opacity-60 transition-opacity relative inline-flex items-center truncate"
                 onMouseEnter={() => setNameHovered(true)}
                 onMouseLeave={() => setNameHovered(false)}
                 style={{ lineHeight: '32px' }}
@@ -115,8 +116,8 @@ export default function Navigation() {
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center gap-8 md:gap-10 justify-between">
-              <div className="flex items-center gap-8 md:gap-10">
+            <div className="hidden md:flex items-center xl:justify-between justify-end min-w-0 w-full">
+              <div className="flex items-center gap-4 md:gap-6 lg:gap-8 flex-shrink-0">
                 {menuLinks.map((link) => (
                   <AnimatedLink
                     key={link.href}
@@ -124,11 +125,16 @@ export default function Navigation() {
                     label={link.label}
                     strikethrough={link.strikethrough}
                     isActive={pathname === link.href}
-                    className="text-sm font-mono uppercase tracking-wider text-muted dark:text-muted-dark hover:text-black dark:hover:text-white transition-colors"
+                    className="text-sm font-mono uppercase tracking-wider text-muted dark:text-muted-dark hover:text-black dark:hover:text-white transition-colors whitespace-nowrap"
                   />
                 ))}
               </div>
-              <ThemeToggle />
+              <div className="flex items-center gap-3 lg:gap-4 flex-shrink-0 md:ml-8 lg:ml-12 xl:ml-0">
+                <div className="hidden xl:block">
+                  <TimeDisplay />
+                </div>
+                <ThemeToggle />
+              </div>
             </div>
 
             {/* Mobile Menu Toggle & Theme */}
