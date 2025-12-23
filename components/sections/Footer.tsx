@@ -32,12 +32,12 @@ export default function Footer() {
             GitHub
           </a>
           <a
-            href={siteConfig.links.dribbble}
+            href={siteConfig.links.email}
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm font-mono uppercase tracking-wider text-muted dark:text-muted-dark hover:text-black dark:hover:text-white transition-colors"
           >
-            Dribbble
+            Email
           </a>
         </div>
 

@@ -8,7 +8,6 @@ export interface SiteConfig {
     linkedin: string;
     email: string;
     twitter: string;
-    dribbble: string;
   };
 }
 
