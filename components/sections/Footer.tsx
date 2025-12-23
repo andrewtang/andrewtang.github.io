@@ -6,6 +6,11 @@ export default function Footer() {
   return (
     <footer className="py-12 px-6 md:px-16" role="contentinfo">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-start lg:items-center">
+
+        <p className="text-sm text-muted dark:text-muted-dark inline-flex items-center gap-1 group">
+        © 2026 Andrew Tang · Made with <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline-block transition-all group-hover:stroke-amber-600 group-hover:scale-110" aria-hidden="true"><path d="M10 2v2"></path><path d="M14 2v2"></path><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"></path><path d="M6 2v2"></path></svg> & <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline-block transition-all group-hover:stroke-blue-500 group-hover:scale-110" aria-hidden="true"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
+        </p>
+
         <div className="flex flex-col md:flex-row gap-4 md:gap-6">
           <a
             href={siteConfig.links.linkedin}
@@ -40,10 +45,6 @@ export default function Footer() {
             Email
           </a>
         </div>
-
-        <p className="text-sm text-muted dark:text-muted-dark inline-flex items-center gap-1 group">
-          Made with <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline-block transition-all group-hover:stroke-amber-600 group-hover:scale-110" aria-hidden="true"><path d="M10 2v2"></path><path d="M14 2v2"></path><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"></path><path d="M6 2v2"></path></svg> & <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline-block transition-all group-hover:stroke-blue-500 group-hover:scale-110" aria-hidden="true"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg> in Melbourne, Australia
-        </p>
       </div>
     </footer>
   );
