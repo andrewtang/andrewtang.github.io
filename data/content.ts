@@ -9,6 +9,7 @@ export const siteConfig: SiteConfig = {
     github: "https://github.com/andrewtang",
     linkedin: "https://linkedin.com/in/tang-andrew",
     twitter: "https://twitter.com/tangandrew",
+    dribbble: "https://dribbble.com/andrewtang",
     email: "mailto:hello@andrewtang.net",
   },
 };
