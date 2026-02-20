@@ -17,8 +17,8 @@ export const siteConfig: SiteConfig = {
 export const projects: Project[] = [
   {
     id: 6,
-    title: "Track key investment themes and market trends",
-    description: "Macro • Upcoming 2026",
+    title: "Track investment themes and market trends",
+    description: "Macro iOS APP • Upcoming 2026",
     image: "/images/work/macro.jpg",
     tags: ["UI Design", "Product Strategy"],
     link: "",
