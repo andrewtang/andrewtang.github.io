@@ -16,13 +16,14 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="relative w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+      className="relative w-8 h-8 flex items-center justify-center"
       aria-label="Toggle theme"
       title={`Current theme: ${theme}`}
     >
       <motion.div
         initial={false}
         animate={{ rotate: theme === "dark" ? 180 : 0 }}
+        whileHover={{ scale: 1.2 }}
         transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
         className="relative w-5 h-5"
       >
@@ -35,13 +36,10 @@ export default function ThemeToggle() {
           }}
           transition={{ duration: 0.2 }}
           className="absolute inset-0 w-5 h-5"
-          fill="none"
+          fill="#f24"
           viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
         >
-          <circle cx="12" cy="12" r="4" />
-          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+          <path d="M12 2a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 15a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm7.07-12.07a1 1 0 0 1 0 1.41l-.71.71a1 1 0 1 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 0zM21 11h1a1 1 0 1 1 0 2h-1a1 1 0 1 1 0-2zm-1.93 7.07a1 1 0 0 1-1.41 0l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41zM13 20v1a1 1 0 1 1-2 0v-1a1 1 0 1 1 2 0zm-7.07-1.93a1 1 0 0 1 0-1.41l.71-.71a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1-1.41 0zM3 13H2a1 1 0 1 1 0-2h1a1 1 0 1 1 0 2zm1.93-9.07a1 1 0 0 1 1.41 0l.71.71A1 1 0 0 1 5.64 6.05l-.71-.71a1 1 0 0 1 0-1.41z" />
         </motion.svg>
 
         {/* Moon icon for dark mode */}
@@ -53,10 +51,8 @@ export default function ThemeToggle() {
           }}
           transition={{ duration: 0.2 }}
           className="absolute inset-0 w-5 h-5"
-          fill="none"
+          fill="#8756ff"
           viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
         >
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
         </motion.svg>
