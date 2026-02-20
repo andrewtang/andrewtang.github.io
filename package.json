@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/three": "^0.180.0",
     "clsx": "^2.1.1",
+    "dialkit": "^0.2.2",
     "framer-motion": "^12.23.24",
     "next": "15.5.10",
     "react": "^18",

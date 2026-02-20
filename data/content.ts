@@ -147,4 +147,22 @@ export const labs: Lab[] = [
     tags: ["React", "Framer Motion", "Animation"],
     link: "/labs/03",
   },
+  {
+    id: 4,
+    title: "Notification Toast",
+    description: "Spring-animated notification toast with live DialKit controls for tuning spring physics, opacity, and slide distance",
+    status: "in-progress",
+    started: "February 2026",
+    tags: ["Framer Motion", "DialKit", "Spring", "TypeScript"],
+    link: "/labs/04",
+  },
+  {
+    id: 5,
+    title: "Page Transition",
+    description: "Staggered page transition with exit fade and spring-driven child entrances, with live DialKit controls for every timing value",
+    status: "in-progress",
+    started: "February 2026",
+    tags: ["Framer Motion", "DialKit", "AnimatePresence", "TypeScript"],
+    link: "/labs/05",
+  },
 ];

@@ -3,11 +3,11 @@ import { siteConfig } from "@/data/content";
 import Lab04Demo from "@/components/labs/Lab04Demo";
 
 export const metadata: Metadata = {
-  title: "Motion.dev Animations",
-  description: "Exploring animations with motion.dev",
+  title: "Notification Toast",
+  description: "Spring-animated notification toast with live DialKit controls",
   openGraph: {
-    title: `Motion.dev Animations | ${siteConfig.name}`,
-    description: "Exploring animations with motion.dev",
+    title: `Notification Toast | ${siteConfig.name}`,
+    description: "Spring-animated notification toast with live DialKit controls",
     url: `${siteConfig.url}/labs/04`,
   },
 };

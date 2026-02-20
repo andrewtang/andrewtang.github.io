@@ -10,6 +10,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  transpilePackages: ['dialkit'],
   // Update this with your GitHub username and repo name
   // basePath: '/REPO-NAME',
   // assetPrefix: '/REPO-NAME/',
