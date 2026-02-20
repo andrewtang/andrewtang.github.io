@@ -2,12 +2,18 @@
 
 import { siteConfig } from "@/data/content";
 
-export default function Footer() {
+interface FooterProps {
+  variant?: "default" | "project";
+}
+
+export default function Footer({ variant = "default" }: FooterProps) {
+  const isProject = variant === "project";
+
   return (
     <footer className="py-12 px-6 md:px-16" role="contentinfo">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-start lg:items-center">
+      <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-start lg:items-center`}>
 
-        <div className="flex flex-col md:flex-row gap-4 md:gap-6 order-1 lg:order-2">
+        <div className={`flex flex-col md:flex-row gap-4 md:gap-6 order-1 lg:order-2 ${isProject ? "lg:justify-end" : ""}`}>
           <a
             href={siteConfig.links.linkedin}
             target="_blank"

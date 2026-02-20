@@ -54,7 +54,8 @@ function ProjectCard({ project, index }: ProjectCardProps) {
   const { position: mousePosition, handleMouseMove } = useCursorPosition();
   const { isHovered, showContent: showText, handleMouseEnter, handleMouseLeave } = useHoverDelay({ delay: 200 });
 
-  const hasLink = project.link && project.link.trim() !== '';
+  const hasLink = project.published === true;
+  const linkHref = `/projects/${project.slug}`;
 
   // Create uneven grid: first project is 440px, second is 480px
   const imageHeight = index === 0 ? 'h-[240px] sm:h-[320px] md:h-[400px] lg:h-[420px]' : 'h-[240px] sm:h-[320px] md:h-[400px] lg:h-[480px]';
@@ -135,7 +136,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.15, delay: 0.05 }}
                       >
-                        {project.tooltipText || "Case Study Coming Soon"}
+                        {project.tooltipText || "View Case Study"}
                       </motion.span>
                     </>
                   )}
@@ -166,7 +167,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
       transition={{ duration: 0.6, delay: index * 0.1 }}
     >
       {hasLink ? (
-        <Link href={project.link} className="group block">
+        <Link href={linkHref} className="group block">
           {content}
         </Link>
       ) : (

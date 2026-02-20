@@ -1,0 +1,50 @@
+import type { Lab } from '@/types';
+
+export const labs: Lab[] = [
+  {
+    id: 1,
+    title: "Bayer Dithering Playground",
+    description: "An interactive WebGL shader that applies Bayer dithering effects with click-to-spawn ripples",
+    status: "in-progress",
+    started: "October 2025",
+    tags: ["WebGL", "Three.js", "Shaders", "GLSL"],
+    link: "/labs/01",
+    github: "https://github.com/andrewtang/bayer-dithering-webgl-demo",
+  },
+  {
+    id: 2,
+    title: "AI Chat Interface",
+    description: "A modern chat interface with animated typing effects and gradient hover states",
+    status: "in-progress",
+    started: "October 2025",
+    tags: ["React", "Framer Motion", "TypeScript"],
+    link: "/labs/02",
+  },
+  {
+    id: 3,
+    title: "Task Manager Demo",
+    description: "An automated task management interface with priority levels and real-time statistics",
+    status: "in-progress",
+    started: "November 2025",
+    tags: ["React", "Framer Motion", "Animation"],
+    link: "/labs/03",
+  },
+  {
+    id: 4,
+    title: "Notification Toast",
+    description: "Spring-animated notification toast with live DialKit controls for tuning spring physics, opacity, and slide distance",
+    status: "in-progress",
+    started: "February 2026",
+    tags: ["Framer Motion", "DialKit", "Spring", "TypeScript"],
+    link: "/labs/04",
+  },
+  {
+    id: 5,
+    title: "Page Transition",
+    description: "Staggered page transition with exit fade and spring-driven child entrances, with live DialKit controls for every timing value",
+    status: "in-progress",
+    started: "February 2026",
+    tags: ["Framer Motion", "DialKit", "AnimatePresence", "TypeScript"],
+    link: "/labs/05",
+  },
+];

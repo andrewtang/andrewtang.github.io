@@ -116,26 +116,51 @@ export default function Navigation() {
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center xl:justify-between justify-end min-w-0 w-full">
-              <div className="flex items-center gap-4 md:gap-6 lg:gap-8 flex-shrink-0">
-                {menuLinks.map((link) => (
-                  <AnimatedLink
-                    key={link.label}
-                    href={link.href}
-                    label={link.label}
-                    strikethrough={link.strikethrough}
-                    isActive={pathname === link.href}
-                    className="text-sm font-mono uppercase tracking-wider text-muted dark:text-muted-dark hover:text-black dark:hover:text-white transition-colors whitespace-nowrap"
-                  />
-                ))}
-              </div>
-              <div className="flex items-center gap-3 lg:gap-4 flex-shrink-0 md:ml-8 lg:ml-12 xl:ml-0">
-                <div className="hidden xl:block">
-                  <TimeDisplay />
+            {pathname?.startsWith('/projects/') ? (
+              /* Project detail: links + controls all right-aligned with gap */
+              <div className="hidden md:flex items-center justify-end min-w-0 w-full gap-8 lg:gap-12">
+                <div className="flex items-center gap-4 md:gap-6 lg:gap-8 flex-shrink-0">
+                  {menuLinks.map((link) => (
+                    <AnimatedLink
+                      key={link.label}
+                      href={link.href}
+                      label={link.label}
+                      strikethrough={link.strikethrough}
+                      isActive={pathname === link.href}
+                      className="text-sm font-mono uppercase tracking-wider text-muted dark:text-muted-dark hover:text-black dark:hover:text-white transition-colors whitespace-nowrap"
+                    />
+                  ))}
                 </div>
-                <ThemeToggle />
+                <div className="flex items-center gap-3 lg:gap-4 flex-shrink-0">
+                  <div className="hidden xl:block">
+                    <TimeDisplay />
+                  </div>
+                  <ThemeToggle />
+                </div>
               </div>
-            </div>
+            ) : (
+              /* Default: links left of controls, space-between on xl */
+              <div className="hidden md:flex items-center xl:justify-between justify-end min-w-0 w-full">
+                <div className="flex items-center gap-4 md:gap-6 lg:gap-8 flex-shrink-0">
+                  {menuLinks.map((link) => (
+                    <AnimatedLink
+                      key={link.label}
+                      href={link.href}
+                      label={link.label}
+                      strikethrough={link.strikethrough}
+                      isActive={pathname === link.href}
+                      className="text-sm font-mono uppercase tracking-wider text-muted dark:text-muted-dark hover:text-black dark:hover:text-white transition-colors whitespace-nowrap"
+                    />
+                  ))}
+                </div>
+                <div className="flex items-center gap-3 lg:gap-4 flex-shrink-0 md:ml-8 lg:ml-12 xl:ml-0">
+                  <div className="hidden xl:block">
+                    <TimeDisplay />
+                  </div>
+                  <ThemeToggle />
+                </div>
+              </div>
+            )}
 
             {/* Mobile Menu Toggle & Theme */}
             <div className="md:hidden ml-auto flex items-center gap-3">
