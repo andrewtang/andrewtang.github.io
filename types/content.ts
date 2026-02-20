@@ -6,9 +6,9 @@ export interface SiteConfig {
   links: {
     github: string;
     linkedin: string;
-    dribbble: string;
     email: string;
     twitter: string;
+    dribbble?: string;
   };
 }
 
