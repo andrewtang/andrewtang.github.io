@@ -9,12 +9,21 @@ export const siteConfig: SiteConfig = {
     github: "https://github.com/andrewtang",
     linkedin: "https://linkedin.com/in/tang-andrew",
     twitter: "https://twitter.com/tangandrew",
-    dribbble: "https://dribbble.com/andrewtang",
     email: "mailto:hello@andrewtang.net",
+    dribbble: "https://dribbble.com/andrewtang",
   },
 };
 
 export const projects: Project[] = [
+  {
+    id: 6,
+    title: "Track key investment themes and market trends",
+    description: "Macro • Upcoming 2026",
+    image: "/images/work/macro.jpg",
+    tags: ["UI Design", "Product Strategy"],
+    link: "",
+    tooltipText: "Coming soon",
+  },
   {
     id: 5,
     title: "A new kind of investing platform",
@@ -38,7 +47,7 @@ export const projects: Project[] = [
     image: "/images/work/latitude.jpg",
     tags: ["Design", "Product Strategy", "UX Research"],
     link: "",
-    tooltipText: "Case study coming soon",
+    tooltipText: "Coming soon",
   },
   {
     id: 2,
@@ -47,7 +56,7 @@ export const projects: Project[] = [
     image: "/images/work/paypal.jpg",
     tags: ["Design", "Product Strategy", "UX Research"],
     link: "",
-    tooltipText: "Case study upon request",
+    tooltipText: "Upon request",
   },
   {
     id: 1,

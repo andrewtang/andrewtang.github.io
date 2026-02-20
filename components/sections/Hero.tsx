@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { experience } from "@/data/content";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import { useCursorPosition } from "@/hooks";
 import StackedLogoToggle from "@/components/ui/StackedLogoToggle";
@@ -23,82 +23,23 @@ export default function Hero() {
     experience.map(() => 0)
   );
 
-  // Track hover state for each experience item to pause auto-rotation
-  const [hoveredIndices, setHoveredIndices] = useState<Set<number>>(new Set());
-  
-  // Store interval refs for cleanup
-  const intervalRefs = useRef<Map<number, NodeJS.Timeout>>(new Map());
-
   const handleLogoNext = (index: number) => {
     setLogoIndices(prev => {
       const next = [...prev];
       const exp = experience[index];
       if (exp.logos) {
         next[index] = (next[index] + 1) % exp.logos.length;
+        console.log(`Updated index ${index} to ${next[index]}, company: ${exp.logos[next[index]].alt}`);
       }
       return next;
     });
-  };
-
-  // Set up auto-rotation for experiences with multiple logos
-  useEffect(() => {
-    experience.forEach((exp, index) => {
-      if (exp.logos && exp.logos.length > 1) {
-        // Clear existing interval if any
-        const existingInterval = intervalRefs.current.get(index);
-        if (existingInterval) {
-          clearInterval(existingInterval);
-        }
-
-        // Only set up auto-rotation if not hovered
-        if (!hoveredIndices.has(index)) {
-          const interval = setInterval(() => {
-            setLogoIndices(prev => {
-              const next = [...prev];
-              const expItem = experience[index];
-              if (expItem.logos) {
-                next[index] = (next[index] + 1) % expItem.logos.length;
-              }
-              return next;
-            });
-          }, 3000); // Rotate every 3 seconds
-
-          intervalRefs.current.set(index, interval);
-        }
-      }
-    });
-
-    // Cleanup on unmount or when dependencies change
-    return () => {
-      intervalRefs.current.forEach((interval) => clearInterval(interval));
-      intervalRefs.current.clear();
-    };
-  }, [hoveredIndices]);
-
-  const handleMouseEnter = (index: number) => {
-    setHoveredIndices(prev => new Set(prev).add(index));
-    // Clear interval when hovered
-    const interval = intervalRefs.current.get(index);
-    if (interval) {
-      clearInterval(interval);
-      intervalRefs.current.delete(index);
-    }
-  };
-
-  const handleMouseLeave = (index: number) => {
-    setHoveredIndices(prev => {
-      const next = new Set(prev);
-      next.delete(index);
-      return next;
-    });
-    // Interval will be restarted by useEffect when hoveredIndices changes
   };
 
   return (
     <section className="flex items-center px-6 md:px-16 pt-20 pb-8">
       <div className="w-full">
         {/* NOTE: Two-column layout can be restored by uncommenting desktop:grid-cols-2 below */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 xl:gap-8 pt-[8vh] lg:pt-[12vh] xl:pt-[16vh] pb-[72px] items-start">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 xl:gap-8 pt-[8vh] lg:pt-[12vh] xl:pt-[16vh] items-start">
           {/* Left side - Main heading */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -140,11 +81,7 @@ export default function Hero() {
           >
             <div className="space-y-6 md:space-y-4">
               {experience.map((exp, index) => (
-                <div 
-                  key={exp.id}
-                  onMouseEnter={() => handleMouseEnter(index)}
-                  onMouseLeave={() => handleMouseLeave(index)}
-                >
+                <div key={exp.id}>
                   {/* Mobile: Stacked vertically */}
                   <div className="flex flex-col gap-2 md:hidden">
                     <div className="text-muted dark:text-muted-dark font-mono text-sm">
@@ -180,13 +117,10 @@ export default function Hero() {
                             <AnimatePresence mode="wait">
                               <motion.span
                                 key={exp.logos ? `${index}-${logoIndices[index]}` : exp.company}
-                                initial={{ opacity: 0, y: 8 }}
+                                initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -8 }}
-                                transition={{ 
-                                  duration: 0.4,
-                                  ease: [0.4, 0, 0.2, 1]
-                                }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.2 }}
                               >
                                 {exp.logos ? exp.logos[logoIndices[index]].alt : exp.company}
                               </motion.span>
@@ -212,13 +146,10 @@ export default function Hero() {
                             <AnimatePresence mode="wait">
                               <motion.span
                                 key={exp.logos ? `${index}-${logoIndices[index]}` : exp.company}
-                                initial={{ opacity: 0, y: 8 }}
+                                initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -8 }}
-                                transition={{ 
-                                  duration: 0.4,
-                                  ease: [0.4, 0, 0.2, 1]
-                                }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.2 }}
                               >
                                 {exp.logos ? exp.logos[logoIndices[index]].alt : exp.company}
                               </motion.span>
@@ -270,13 +201,10 @@ export default function Hero() {
                             <AnimatePresence mode="wait">
                               <motion.span
                                 key={exp.logos ? `${index}-${logoIndices[index]}` : exp.company}
-                                initial={{ opacity: 0, y: 8 }}
+                                initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -8 }}
-                                transition={{ 
-                                  duration: 0.4,
-                                  ease: [0.4, 0, 0.2, 1]
-                                }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.2 }}
                               >
                                 {exp.logos ? exp.logos[logoIndices[index]].alt : exp.company}
                               </motion.span>
@@ -301,13 +229,10 @@ export default function Hero() {
                             <AnimatePresence mode="wait">
                               <motion.span
                                 key={exp.logos ? `${index}-${logoIndices[index]}` : exp.company}
-                                initial={{ opacity: 0, y: 8 }}
+                                initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -8 }}
-                                transition={{ 
-                                  duration: 0.4,
-                                  ease: [0.4, 0, 0.2, 1]
-                                }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.2 }}
                               >
                                 {exp.logos ? exp.logos[logoIndices[index]].alt : exp.company}
                               </motion.span>

@@ -64,11 +64,12 @@ function ProjectCard({ project, index }: ProjectCardProps) {
       {/* Project Image Container - Wrapper for tooltip positioning */}
       <div className="relative mb-3">
         <div
-          className={`relative w-full ${imageHeight} overflow-hidden border border-black/5 dark:border-white/5 cursor-none`}
+          className={`relative w-full ${imageHeight} overflow-hidden rounded-xl cursor-none`}
           onMouseMove={handleMouseMove}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
+          <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/5 dark:ring-white/5 z-10 pointer-events-none" />
           <Image
             src={project.image}
             alt={project.title}

@@ -16,7 +16,7 @@ export default function StructuredData() {
       siteConfig.links.twitter,
       siteConfig.links.github,
       siteConfig.links.dribbble,
-    ],
+    ].filter(Boolean),
     address: {
       "@type": "PostalAddress",
       addressLocality: "Melbourne",

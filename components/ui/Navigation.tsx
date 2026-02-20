@@ -120,7 +120,7 @@ export default function Navigation() {
               <div className="flex items-center gap-4 md:gap-6 lg:gap-8 flex-shrink-0">
                 {menuLinks.map((link) => (
                   <AnimatedLink
-                    key={link.href}
+                    key={link.label}
                     href={link.href}
                     label={link.label}
                     strikethrough={link.strikethrough}
@@ -182,7 +182,7 @@ export default function Navigation() {
             <div className="flex flex-col items-center justify-center h-full gap-8 px-6">
               {menuLinks.map((link, index) => (
                 <motion.div
-                  key={link.href}
+                  key={link.label}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 + 0.2 }}
