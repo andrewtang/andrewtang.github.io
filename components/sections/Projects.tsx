@@ -16,7 +16,7 @@ export default function Projects() {
     <section id="work" className="px-6 md:px-16 pt-8 md:pt-12 pb-8 md:pb-24">
       <div className="w-full">
         {/* Mobile/Tablet/Desktop: Single column in original order */}
-        <div className="flex xl:hidden flex-col gap-6">
+        <div className="flex xl:hidden flex-col gap-10">
           {projects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
@@ -25,7 +25,7 @@ export default function Projects() {
         {/* XL: Two columns */}
         <div className="hidden xl:flex flex-row gap-8">
           {/* Left Column */}
-          <div className="flex-1 flex flex-col gap-8">
+          <div className="flex-1 flex flex-col gap-12">
             {leftColumn.map((project) => {
               const index = projects.indexOf(project);
               return <ProjectCard key={project.id} project={project} index={index} />;
@@ -33,7 +33,7 @@ export default function Projects() {
           </div>
 
           {/* Right Column */}
-          <div className="flex-1 flex flex-col gap-8">
+          <div className="flex-1 flex flex-col gap-12">
             {rightColumn.map((project) => {
               const index = projects.indexOf(project);
               return <ProjectCard key={project.id} project={project} index={index} />;
@@ -130,7 +130,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
                         <circle cx="12" cy="12" r="3"/>
                       </motion.svg>
                       <motion.span
-                        className="text-white dark:text-black font-mono font-medium text-xs uppercase tracking-wider whitespace-nowrap"
+                        className="text-white dark:text-black font-mono font-medium text-xs uppercase whitespace-nowrap" style={{ letterSpacing: '0.03em' }}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.15, delay: 0.05 }}

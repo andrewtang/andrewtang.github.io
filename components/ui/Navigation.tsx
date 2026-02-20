@@ -60,8 +60,8 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-150 bg-[#F1F1F1]/80 dark:bg-[#1a1a1a]/80 ${
-          scrolled ? "backdrop-blur-md border-b border-border dark:border-white/10" : ""
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-150 bg-[#F1F1F1]/80 dark:bg-[#1a1a1a]/80 border-b ${
+          scrolled ? "backdrop-blur-md border-black/10 dark:border-white/10" : "border-transparent"
         }`}
         role="navigation"
         aria-label="Main navigation"

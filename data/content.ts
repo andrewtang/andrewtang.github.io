@@ -22,7 +22,7 @@ export const projects: Project[] = [
     image: "/images/work/macro.jpg",
     tags: ["UI Design", "Product Strategy"],
     link: "",
-    tooltipText: "Coming soon",
+    tooltipText: "App coming soon",
   },
   {
     id: 5,
@@ -47,7 +47,7 @@ export const projects: Project[] = [
     image: "/images/work/latitude.jpg",
     tags: ["Design", "Product Strategy", "UX Research"],
     link: "",
-    tooltipText: "Coming soon",
+    tooltipText: "Case study coming soon",
   },
   {
     id: 2,

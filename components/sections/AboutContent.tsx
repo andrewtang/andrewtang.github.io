@@ -137,7 +137,7 @@ export default function AboutContent() {
             >
               <div className="flex flex-row gap-2 lg:gap-0 w-full lg:w-auto">
               {[
-                { src: "/images/andy-1.webp", rotation: "lg:-rotate-2", tooltip: "This is me :)" },
+                { src: "/images/andy-1.webp", rotation: "lg:-rotate-2", tooltip: "Hello!" },
                 { src: "/images/andy-3.webp", rotation: "lg:rotate-1", tooltip: "Railay Beach, Thailand" },
                 { src: "/images/andy-2.webp", rotation: "lg:rotate-2", tooltip: "Talking about Design Systems" },
               ].map((image, index) => {
