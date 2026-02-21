@@ -8,7 +8,7 @@ export const card: Project = {
   image: "/images/work/betashares.jpg",
   tags: ["UI Design", "Prototyping", "User Testing"],
   link: "",
-  tooltipText: "Coming soon",
+  tooltipText: "Upon request",
   published: false,
 };
 

@@ -8,7 +8,7 @@ export const card: Project = {
   image: "/images/work/latitude.jpg",
   tags: ["Design", "Product Strategy", "UX Research"],
   link: "",
-  tooltipText: "Coming soon",
+  tooltipText: "Upon request",
   published: false,
 };
 
