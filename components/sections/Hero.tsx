@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { experience } from "@/data/content";
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { useCursorPosition } from "@/hooks";
 import StackedLogoToggle from "@/components/ui/StackedLogoToggle";
@@ -23,17 +23,28 @@ export default function Hero() {
     experience.map(() => 0)
   );
 
-  const handleLogoNext = (index: number) => {
+  const handleLogoNext = useCallback((index: number) => {
     setLogoIndices(prev => {
       const next = [...prev];
       const exp = experience[index];
       if (exp.logos) {
         next[index] = (next[index] + 1) % exp.logos.length;
-        console.log(`Updated index ${index} to ${next[index]}, company: ${exp.logos[next[index]].alt}`);
       }
       return next;
     });
-  };
+  }, []);
+
+  // Auto-rotate logos for experiences that have multiple logos
+  useEffect(() => {
+    const multiLogoIndices = experience
+      .map((exp, i) => (exp.logos && exp.logos.length > 1 ? i : -1))
+      .filter((i) => i !== -1);
+    if (multiLogoIndices.length === 0) return;
+    const timer = setInterval(() => {
+      multiLogoIndices.forEach((i) => handleLogoNext(i));
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [handleLogoNext]);
 
   return (
     <section className="flex items-center px-6 md:px-16 pt-20 pb-8">
@@ -104,7 +115,7 @@ export default function Hero() {
                             }}
                           >
                             {exp.logos ? (
-                              <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} />
+                              <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} autoRotateInterval={0} />
                             ) : exp.logo && (
                               <Image
                                 src={exp.logo}
@@ -133,7 +144,7 @@ export default function Hero() {
                             onClick={() => exp.logos && handleLogoNext(index)}
                           >
                             {exp.logos ? (
-                              <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} />
+                              <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} autoRotateInterval={0} />
                             ) : exp.logo && (
                               <Image
                                 src={exp.logo}
@@ -188,7 +199,7 @@ export default function Hero() {
                             }}
                           >
                             {exp.logos ? (
-                              <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} />
+                              <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} autoRotateInterval={0} />
                             ) : exp.logo && (
                               <Image
                                 src={exp.logo}
@@ -216,7 +227,7 @@ export default function Hero() {
                             onClick={() => exp.logos && handleLogoNext(index)}
                           >
                             {exp.logos ? (
-                              <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} />
+                              <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} autoRotateInterval={0} />
                             ) : exp.logo && (
                               <Image
                                 src={exp.logo}
@@ -269,7 +280,7 @@ export default function Hero() {
                           }}
                         >
                           {exp.logos ? (
-                            <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} />
+                            <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} autoRotateInterval={0} />
                           ) : exp.logo && (
                             <Image
                               src={exp.logo}
@@ -297,7 +308,7 @@ export default function Hero() {
                           onClick={() => exp.logos && handleLogoNext(index)}
                         >
                           {exp.logos ? (
-                            <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} />
+                            <StackedLogoToggle currentIndex={logoIndices[index]} onNext={() => handleLogoNext(index)} logos={exp.logos} size={24} autoRotateInterval={0} />
                           ) : exp.logo && (
                             <Image
                               src={exp.logo}

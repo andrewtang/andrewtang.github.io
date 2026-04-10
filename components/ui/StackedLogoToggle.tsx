@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, forwardRef, useImperativeHandle } from 'react';
+import { useState, useEffect, useRef, useCallback, forwardRef, useImperativeHandle } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 
@@ -14,6 +14,7 @@ interface StackedLogoToggleProps {
   size?: number;
   currentIndex?: number;
   onNext?: () => void;
+  autoRotateInterval?: number;
 }
 
 export interface StackedLogoToggleRef {
@@ -21,25 +22,36 @@ export interface StackedLogoToggleRef {
 }
 
 const StackedLogoToggle = forwardRef<StackedLogoToggleRef, StackedLogoToggleProps>(
-  ({ logos, size = 48, currentIndex: externalIndex, onNext }, ref) => {
+  ({ logos, size = 48, currentIndex: externalIndex, onNext, autoRotateInterval = 3000 }, ref) => {
     const [internalIndex, setInternalIndex] = useState(0);
     const [direction, setDirection] = useState(0);
 
     // Use external index if provided, otherwise use internal state
     const currentIndex = externalIndex !== undefined ? externalIndex : internalIndex;
 
-    const handleNext = () => {
+    // Keep a stable ref to the latest onNext so the interval never resets
+    const onNextRef = useRef(onNext);
+    useEffect(() => { onNextRef.current = onNext; }, [onNext]);
+
+    const handleNext = useCallback(() => {
       setDirection(1);
-      if (onNext) {
-        onNext();
+      if (onNextRef.current) {
+        onNextRef.current();
       } else {
         setInternalIndex((prev) => (prev + 1) % logos.length);
       }
-    };
+    }, [logos.length]);
 
     useImperativeHandle(ref, () => ({
       next: handleNext,
     }));
+
+    // Auto-rotate logos on an interval
+    useEffect(() => {
+      if (logos.length <= 1 || !autoRotateInterval) return;
+      const timer = setInterval(handleNext, autoRotateInterval);
+      return () => clearInterval(timer);
+    }, [logos.length, autoRotateInterval, handleNext]);
 
     const handleClick = (e: React.MouseEvent) => {
       e.preventDefault();
@@ -48,27 +60,18 @@ const StackedLogoToggle = forwardRef<StackedLogoToggleRef, StackedLogoToggleProp
     };
 
   const variants = {
-    enter: () => ({
-      x: 12,
-      y: 2,
-      scale: 0.98,
-      opacity: 0.8,
-      zIndex: 0,
-    }),
+    enter: {
+      scale: 0.9,
+      opacity: 0,
+    },
     center: {
-      x: 0,
-      y: 0,
       scale: 1,
       opacity: 1,
-      zIndex: 10,
     },
-    exit: () => ({
-      x: 0,
-      y: 0,
-      scale: 1,
-      opacity: 0.9,
-      zIndex: 5,
-    }),
+    exit: {
+      scale: 0.9,
+      opacity: 0,
+    },
   };
 
   return (
@@ -92,10 +95,8 @@ const StackedLogoToggle = forwardRef<StackedLogoToggleRef, StackedLogoToggleProp
             animate="center"
             exit="exit"
             transition={{
-              type: 'spring',
-              stiffness: 500,
-              damping: 30,
-              mass: 0.8,
+              duration: 0.25,
+              ease: 'easeInOut',
             }}
             className="absolute inset-0"
             style={{
