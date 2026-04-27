@@ -33,6 +33,7 @@ export const card: Project = {
   title: "The one-line project title",
   description: "Company • Shipped YYYY",
   image: "/images/work/my-project.jpg",
+  hoverVideo: "/images/work/my-project.mp4", // optional — plays on hover instead of the zoom effect
   tags: ["UI Design", "UX Research"],
   link: "",                           // leave empty — routing is handled automatically
   tooltipText: "Coming soon",         // shown on hover when not published
@@ -67,6 +68,10 @@ const all = [macro, betashares, myProject, afterpay, ...];
 
 Place at `public/images/work/my-project.jpg`.
 Recommended: **1600 × 900px** (16:9), JPG, ≤ 300 KB.
+
+### 4. (Optional) Add a hover video
+
+Set `hoverVideo: "/images/work/my-project.mp4"` on `card` to play a video on hover instead of the default scale-up zoom. The video is muted, plays inline, and fades back to the cover image between loops. Keep clips short (≤ 6s) and ≤ 2 MB so the page stays light.
 
 ---
 
@@ -146,6 +151,7 @@ Content is an array of `ProjectContentBlock` objects.
 - [ ] `data/projects/my-project.ts` created with `card` and `detail` exports
 - [ ] Registered in `data/projects/index.ts` `all` array in the right position
 - [ ] Cover image at `public/images/work/[slug].jpg` (16:9, ≤ 300 KB)
+- [ ] (Optional) Hover video at `public/images/work/[slug].mp4` (≤ 6s, ≤ 2 MB) and `hoverVideo` set on `card`
 - [ ] `overview` written (1–2 sentences, shown above the cover image)
 - [ ] `content[]` has at minimum: Problem, Approach, Outcome sections
 - [ ] `published: true` added to `card` when ready to publish

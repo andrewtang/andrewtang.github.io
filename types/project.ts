@@ -4,6 +4,7 @@ export interface Project {
   title: string;
   description: string;
   image: string;
+  hoverVideo?: string;
   tags: string[];
   link: string;
   tooltipText?: string;

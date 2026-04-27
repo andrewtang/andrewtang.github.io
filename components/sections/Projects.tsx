@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "@/data/content";
 import Link from "next/link";
 import Image from "next/image";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { Project } from "@/types";
 import { useCursorPosition, useHoverDelay } from "@/hooks";
 
@@ -53,9 +54,39 @@ interface ProjectCardProps {
 function ProjectCard({ project, index }: ProjectCardProps) {
   const { position: mousePosition, handleMouseMove } = useCursorPosition();
   const { isHovered, showContent: showText, handleMouseEnter, handleMouseLeave } = useHoverDelay({ delay: 200 });
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isHoveredRef = useRef(isHovered);
+  isHoveredRef.current = isHovered;
+  const [videoVisible, setVideoVisible] = useState(false);
 
   const hasLink = project.published === true;
   const linkHref = `/projects/${project.slug}`;
+  const hasHoverVideo = Boolean(project.hoverVideo);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (isHovered) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+      setVideoVisible(true);
+    } else {
+      video.pause();
+      video.currentTime = 0;
+      setVideoVisible(false);
+    }
+  }, [isHovered]);
+
+  const handleVideoEnded = useCallback(() => {
+    setVideoVisible(false);
+    window.setTimeout(() => {
+      const video = videoRef.current;
+      if (!video || !isHoveredRef.current) return;
+      video.currentTime = 0;
+      video.play().catch(() => {});
+      setVideoVisible(true);
+    }, 300);
+  }, []);
 
   // Create uneven grid: first project is 440px, second is 480px
   const imageHeight = index === 0 ? 'h-[240px] sm:h-[320px] md:h-[400px] lg:h-[420px]' : 'h-[240px] sm:h-[320px] md:h-[400px] lg:h-[480px]';
@@ -75,8 +106,20 @@ function ProjectCard({ project, index }: ProjectCardProps) {
             src={project.image}
             alt={project.title}
             fill
-            className="object-cover transition-all duration-500 group-hover:scale-105"
+            className={`object-cover transition-all duration-500 ${hasHoverVideo ? '' : 'group-hover:scale-105'}`}
           />
+          {hasHoverVideo && (
+            <video
+              ref={videoRef}
+              src={project.hoverVideo}
+              muted
+              playsInline
+              preload="metadata"
+              aria-hidden
+              onEnded={handleVideoEnded}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${videoVisible ? 'opacity-100' : 'opacity-0'}`}
+            />
+          )}
         </div>
 
         {/* Cursor-following Tooltip - Outside overflow container */}
