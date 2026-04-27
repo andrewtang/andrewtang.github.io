@@ -26,7 +26,7 @@ function slugify(text: string): string {
 function buildTOC(detail: ProjectDetail): TOCItem[] {
   const items: TOCItem[] = [{ id: "overview", label: "Overview" }];
   for (const block of detail.content) {
-    if (block.type === "text" && block.heading) {
+    if ((block.type === "text" || block.type === "list") && block.heading) {
       items.push({ id: slugify(block.heading), label: block.heading });
     }
   }
@@ -64,7 +64,7 @@ export default async function ProjectPage({ params }: Props) {
   if (!project || project.published !== true) notFound();
 
   const hasTOC = project!.published === true && !!detail && detail.content.some(
-    (b) => b.type === "text" && b.heading
+    (b) => (b.type === "text" || b.type === "list") && b.heading
   );
   const tocItems = detail && hasTOC ? buildTOC(detail) : [];
 
@@ -123,11 +123,13 @@ export default async function ProjectPage({ params }: Props) {
 
               {/* Metadata grid */}
               {detail && (
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pb-10 md:pb-12 border-b border-black/10 dark:border-white/10">
-                  <MetaItem label="Role" value={detail.role} />
-                  <MetaItem label="Company" value={detail.company} />
-                  <MetaItem label="Year" value={detail.year} />
-                  <div>
+                <div className="pb-10 md:pb-12 border-b border-black/10 dark:border-white/10">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                    <MetaItem label="Role" value={detail.role} />
+                    <MetaItem label="Company" value={detail.company} />
+                    <MetaItem label="Year" value={detail.year} />
+                  </div>
+                  <div className="mt-6">
                     <p className="text-xs font-mono uppercase tracking-wider text-muted dark:text-muted-dark mb-1.5">
                       Tags
                     </p>
@@ -193,12 +195,14 @@ function ContentBlock({
   if (block.type === "image" && block.src) {
     return (
       <figure className={block.layout === "full" ? "-mx-6 sm:-mx-8" : ""}>
-        <div className="relative w-full aspect-[16/9] overflow-hidden rounded-none sm:rounded-xl">
+        <div
+          className={`relative w-full aspect-[16/9] overflow-hidden rounded-none sm:rounded-xl ${block.frame ? "bg-black/5 dark:bg-white/5" : ""}`}
+        >
           <Image
             src={block.src}
             alt={block.alt ?? ""}
             fill
-            className="object-cover"
+            className={block.frame ? "object-contain p-6 sm:p-12" : "object-cover"}
           />
         </div>
         {block.caption && (
@@ -210,6 +214,30 @@ function ContentBlock({
     );
   }
 
+  if (block.type === "list" && block.items && block.items.length > 0) {
+    const sectionId = block.heading ? slugify(block.heading) : undefined;
+    const cols = block.columns === 2 ? "sm:grid-cols-2" : "grid-cols-1";
+    return (
+      <div id={sectionId} className="scroll-mt-24">
+        {block.heading && (
+          <h2 className="text-xs font-mono uppercase tracking-wider text-muted dark:text-muted-dark mb-4">
+            {block.heading}
+          </h2>
+        )}
+        <ul className={`grid ${cols} gap-x-8 gap-y-3`}>
+          {block.items.map((item, i) => (
+            <li
+              key={i}
+              className="text-base leading-relaxed text-black/80 dark:text-white/80"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
   if (block.type === "images" && block.srcs) {
     return (
       <figure>
@@ -217,13 +245,13 @@ function ContentBlock({
           {block.srcs.map((img, i) => (
             <div
               key={i}
-              className="relative w-full aspect-[4/3] overflow-hidden rounded-xl"
+              className={`relative w-full aspect-[4/3] overflow-hidden rounded-xl ${block.frame ? "bg-black/5 dark:bg-white/5" : ""}`}
             >
               <Image
                 src={img.src}
                 alt={img.alt ?? ""}
                 fill
-                className="object-cover"
+                className={block.frame ? "object-contain p-6 sm:p-8" : "object-cover"}
               />
             </div>
           ))}
@@ -251,7 +279,7 @@ function ContentBlock({
           {block.body.split("\n\n").map((para, i) => (
             <p
               key={i}
-              className="text-base md:text-lg leading-relaxed text-black/80 dark:text-white/80"
+              className="text-base leading-relaxed text-black/80 dark:text-white/80"
             >
               {para}
             </p>

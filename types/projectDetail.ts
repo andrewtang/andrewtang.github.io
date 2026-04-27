@@ -1,5 +1,5 @@
 export interface ProjectContentBlock {
-  type: 'text' | 'image' | 'images' | 'divider';
+  type: 'text' | 'image' | 'images' | 'divider' | 'list';
   heading?: string;
   body?: string;
   src?: string;
@@ -7,6 +7,9 @@ export interface ProjectContentBlock {
   alt?: string;
   caption?: string;
   layout?: 'full' | 'contained';
+  items?: string[];
+  columns?: 1 | 2;
+  frame?: boolean;
 }
 
 export interface ProjectDetail {

@@ -99,8 +99,23 @@ Content is an array of `ProjectContentBlock` objects.
 }
 ```
 
-> All `text` blocks with a `heading` are automatically added to the TOC.
+> All `text` and `list` blocks with a `heading` are automatically added to the TOC.
 > "Overview" is always the first TOC entry and scrolls to page top.
+
+### `list` — bullet list with optional 2-column layout
+
+```ts
+{
+  type: "list",
+  heading: "What shipped",  // appears in TOC if set
+  columns: 2,               // 1 (default) or 2; 2 stacks on mobile, splits at sm:
+  items: [
+    "First item.",
+    "Second item.",
+    "Third item.",
+  ],
+}
+```
 
 ### `image` — single image
 
@@ -110,6 +125,7 @@ Content is an array of `ProjectContentBlock` objects.
   src: "/images/work/my-project-screen.jpg",
   alt: "Description for screen readers",
   layout: "full",       // "full" = bleed to column edge | "contained" = within column
+  frame: true,          // optional: tinted bg + object-contain for transparent product mockups
   caption: "Optional caption.",
 }
 ```
@@ -119,6 +135,7 @@ Content is an array of `ProjectContentBlock` objects.
 ```ts
 {
   type: "images",
+  frame: true,          // optional: applies framed background to both images
   srcs: [
     { src: "/images/work/screen-a.jpg", alt: "Screen A" },
     { src: "/images/work/screen-b.jpg", alt: "Screen B" },
@@ -126,6 +143,8 @@ Content is an array of `ProjectContentBlock` objects.
   caption: "Optional caption.",
 }
 ```
+
+> Use `frame: true` for product mockups with transparent backgrounds — they render inside a soft tinted container with `object-contain` rather than being cropped to fill.
 
 ### `divider` — horizontal rule
 

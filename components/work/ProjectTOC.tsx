@@ -60,7 +60,7 @@ export default function ProjectTOC({ items }: Props) {
             <a
               href={`#${item.id}`}
               onClick={(e) => handleClick(e, item.id)}
-              className={`block text-[14px] font-mono uppercase tracking-wider leading-relaxed transition-colors duration-150 ${
+              className={`block text-[16px] leading-relaxed transition-colors duration-150 ${
                 activeId === item.id
                   ? "text-black dark:text-white"
                   : "text-muted dark:text-muted-dark hover:text-black dark:hover:text-white"
