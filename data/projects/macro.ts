@@ -4,7 +4,7 @@ export const card: Project = {
   id: 6,
   slug: "macro",
   title: "Track investment themes and market trends",
-  description: "Macro App • Upcoming 2026",
+  description: "Macro • Upcoming 2026",
   image: "/images/work/macro.jpg",
   hoverVideo: "/images/work/macro.mp4",
   tags: ["UI Design", "Product Strategy"],
