@@ -6,7 +6,7 @@ import * as paypal from './paypal';
 import * as designSystems from './design-systems';
 
 // Display order on homepage (highest id first)
-const all = [betashares, macro, afterpay, latitude, paypal, designSystems];
+const all = [macro, betashares, afterpay, latitude, paypal, designSystems];
 
 export const projects    = all.map((p) => p.card);
 export const projectDetails = all.map((p) => p.detail);
