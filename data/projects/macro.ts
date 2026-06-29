@@ -3,7 +3,7 @@ import type { Project, ProjectDetail } from '@/types';
 export const card: Project = {
   id: 6,
   slug: "macro",
-  title: "Stealth",
+  title: "Personal project",
   description: "Macro • TBD",
   image: "/images/work/macro.jpg",
   hoverVideo: "/images/work/macro.mp4",
